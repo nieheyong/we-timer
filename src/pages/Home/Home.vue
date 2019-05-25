@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import Success from '../../Components/Success'
+import Success from '../../components/Success'
 export default {
   components: {
     Success
