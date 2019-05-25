@@ -1,0 +1,13 @@
+{
+  "pages": [
+    {
+      "path": "pages/Home/Home",
+      "style": {
+        "disableScroll": true
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationStyle": "custom"
+  }
+}
