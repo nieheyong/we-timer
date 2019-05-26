@@ -4,9 +4,14 @@ import { SCENE, SCENE_POS } from './common/enums'
 
 Vue.use(Vuex)
 
+let themeColor = wx.getStorageSync('ThemeColor')
+if (!themeColor) {
+  themeColor = 'linear-gradient(to bottom, #fa5539, #f93251)'
+  wx.setStorage({ key: 'ThemeColor', data: themeColor })
+}
 const store = new Vuex.Store({
   state: {
-    themeColor: 'linear-gradient(to bottom, #fa5539, #f93251)',
+    themeColor: themeColor,
     activeScene: SCENE.Start,
     isSliding: false,
     sysInfo: wx.getSystemInfoSync()
@@ -22,6 +27,7 @@ const store = new Vuex.Store({
   mutations: {
     setThemeColor(state, payload) {
       state.themeColor = payload
+      wx.setStorage({ key: 'ThemeColor', data: payload })
     },
     slideToScene(state, sceneName) {
       state.activeScene = sceneName
