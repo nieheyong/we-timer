@@ -9,6 +9,7 @@
   <div>
     <div
       class="scene-container"
+      @transitionend="$emit('transitionend')"
       :style="{width:width+'vw',height:height+'vh',transform:`translate(-${translate.x}vw,-${translate.y}vh)`}"
     >
       <slot/>

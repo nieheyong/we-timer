@@ -7,11 +7,16 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     theme: 'pink',
-    activeScene: SCENE.Start
+    activeScene: SCENE.Start,
+    isSliding: false,
+    sysInfo: wx.getSystemInfoSync()
   },
   getters: {
     activeScenePos(state) {
       return SCENE_POS[state.activeScene]
+    },
+    titleBarBtnTop(state) {
+      return state.sysInfo.statusBarHeight + 4
     }
   },
   mutations: {
@@ -20,6 +25,10 @@ const store = new Vuex.Store({
     },
     slideToScene(state, sceneName) {
       state.activeScene = sceneName
+      state.isSliding = true
+    },
+    setIsSliding(state, payload) {
+      state.isSliding = payload
     }
   }
 })

@@ -13,7 +13,7 @@
 
 <template>
   <div class="page home-page" :class="[`${theme}-theme`]">
-    <SceneContainer :grid="[4,4]" :active="activeScenePos">
+    <SceneContainer :grid="[4,4]" :active="activeScenePos" @transitionend="transitionend">
       <SceneWrap :position="SCENE_POS.Setting">
         <SettingView/>
       </SceneWrap>
@@ -58,6 +58,11 @@ export default {
   computed: {
     ...mapState(['theme']),
     ...mapGetters(['activeScenePos'])
+  },
+  methods: {
+    transitionend() {
+      this.$store.commit('setIsSliding', false)
+    }
   }
 }
 </script>

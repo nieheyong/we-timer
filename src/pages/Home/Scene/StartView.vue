@@ -16,11 +16,11 @@
   .setting-btn {
     position: absolute;
     left: 7pt;
-    top: 24pt;
+    bottom: 24pt;
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: solid 1px rgba($color: #fff, $alpha: 0.2);
+    border: solid 1px rgba($color: #fff, $alpha: 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,17 +48,17 @@
     align-items: center;
 
     .number {
-      font-size: 60px;
-      @media (min-height: 600px) {
-        & {
-          font-size: 80px;
-        }
-      }
-      @media (min-height: 700px) {
-        & {
-          font-size: 100px;
-        }
-      }
+      font-size: 11vh;
+      // @media (min-height: 600px) {
+      //   & {
+      //     font-size: 80px;
+      //   }
+      // }
+      // @media (min-height: 700px) {
+      //   & {
+      //     font-size: 100px;
+      //   }
+      // }
     }
   }
   .tip {
@@ -69,8 +69,8 @@
     margin: 0 auto;
     // margin-top: 20px;
     display: inline-block;
-    width: 70px;
-    height: 70px;
+    width: 10vh;
+    height: 10vh;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -86,12 +86,12 @@
 </style>
 <template>
   <div class="init-view">
-    <!-- <div class="statusbar" style="height:44px">222</div> -->
+    <div class="statusbar" :style="{height:`${titleBarBtnTop}px`}">222</div>
     <div
       class="setting-btn"
-      style="top:50px;"
+      :style="{top:`${titleBarBtnTop}px`}"
       @click="slideTo(SCENE.Setting)"
-      v-if="activeScene.toString()=== SCENE.Start.toString()"
+      v-if="activeScene.toString()=== SCENE.Start.toString()&&!isSliding"
     >
       <i class="iconfont icon-setting"></i>
     </div>
@@ -108,7 +108,7 @@
       <span class="number">00:10</span>
     </div>
     <div class="tip">共 03:50 分钟</div>
-    <div class="start-btn" @click="slideTo(SCENE.Finish)">
+    <div class="start-btn" @click="slideTo(SCENE.Run)">
       <i class="iconfont icon-go-right"></i>
     </div>
   </div>
@@ -116,7 +116,7 @@
 
 <script>
 import { SCENE } from '../../../common/enums'
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -129,7 +129,8 @@ export default {
     }
   },
   computed: {
-    ...mapState(['activeScene'])
+    ...mapState(['activeScene', 'isSliding']),
+    ...mapGetters(['titleBarBtnTop'])
   }
 }
 </script>
