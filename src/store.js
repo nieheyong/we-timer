@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    theme: 'pink',
+    themeColor: 'linear-gradient(to bottom, #fa5539, #f93251)',
     activeScene: SCENE.Start,
     isSliding: false,
     sysInfo: wx.getSystemInfoSync()
@@ -20,8 +20,8 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    setTheme(state, payload) {
-      state.theme = payload
+    setThemeColor(state, payload) {
+      state.themeColor = payload
     },
     slideToScene(state, sceneName) {
       state.activeScene = sceneName

@@ -43,7 +43,7 @@
     width: 60%;
     padding-top: 60%;
     background: rgba($color: #000000, $alpha: 0.02);
-    box-shadow: 0 0 8px rgba($color: #000000, $alpha: 0.15) inset;
+    box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.15) inset;
   }
   .ring3 {
     width: 40%;

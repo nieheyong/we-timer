@@ -115,7 +115,7 @@
         <span class="title">每次</span>
         <span class="number">00:20</span>
       </div>
-      <div class="piece">
+      <div class="piece"  @click="slideTo(SCENE.Finish)">
         <span class="title">休息</span>
         <span class="number">00:10</span>
       </div>

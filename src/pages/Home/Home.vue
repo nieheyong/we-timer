@@ -12,7 +12,7 @@
 </style>
 
 <template>
-  <div class="page home-page" :class="[`${theme}-theme`]">
+  <div class="page home-page" :style="{background:themeColor}">
     <SceneContainer :grid="[4,4]" :active="activeScenePos" @transitionend="transitionend">
       <SceneWrap :position="SCENE_POS.Setting">
         <SettingView/>
@@ -21,7 +21,7 @@
         <StartView/>
       </SceneWrap>
       <SceneWrap :position="SCENE_POS.Run">
-        <RunView v-if="activeScenePos.toString()===SCENE_POS.Run.toString()"/>
+        <RunView/>
       </SceneWrap>
       <SceneWrap :position="SCENE_POS.Finish">
         <FinishView v-if="activeScenePos.toString()===SCENE_POS.Finish.toString()"/>
@@ -61,7 +61,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['theme']),
+    ...mapState(['themeColor']),
     ...mapGetters(['activeScenePos'])
   },
   methods: {
