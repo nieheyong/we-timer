@@ -2,35 +2,19 @@
 .home-page {
   display: block;
   overflow: hidden;
-  .screen-container {
-    width: 200vw;
-    height: 200vh;
-    overflow: hidden;
-    display: flex;
-    transform: translateX(0vw);
-    transition: all 0.4s;
-    &.active {
-      transform: translateX(-100vw);
-    }
-  }
-  .screen {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-  }
 }
 </style>
 
 <template>
   <div class="page home-page" :class="{'pink-theme':theme,'grey-theme':!theme}">
-    <!-- <div class="screen-container" :class="{active:active}"></div> -->
     <SceneContainer>
-      <SceneWrap>
+      <SceneWrap :slideTo="slideTo" :from="sceneFrom===SCENE.init" :to="sceneTo===SCENE.init">
         <InitView @setting="theme=!theme" @start="active=true"/>
       </SceneWrap>
-      <SceneWrap>
-        <FinishView v-if="active" @close="active=false"/>
+      <SceneWrap :slideTo="slideTo" :from="sceneFrom===SCENE.finish" :to="sceneTo===SCENE.finish">
+        <FinishView @close="active=false"/>
       </SceneWrap>
+      <SceneWrap :slideTo="slideTo" :from="false" :to="false">sdklgjklsajgjsk</SceneWrap>
     </SceneContainer>
   </div>
 </template>
@@ -41,6 +25,11 @@ import InitView from './Views/InitView'
 import SceneWrap from './Views/SceneWrap'
 import SceneContainer from './Views/SceneContainer'
 
+const SCENE = {
+  init: 'InitView',
+  finish: 'FinishView'
+}
+
 export default {
   components: {
     FinishView,
@@ -50,10 +39,10 @@ export default {
   },
   data() {
     return {
-      Scene: {
-        init: 'Init',
-        finish: 'FinishView'
-      },
+      SCENE,
+      slideTo: 'bottom',
+      sceneFrom: 'InitView',
+      sceneTo: 'FinishView',
       active: false,
       theme: false
     }
@@ -80,7 +69,7 @@ export default {
     enterScreen() {
       enterScreenCb()
     },
-    viewScene(direction) {
+    viewScene() {
       // let old={0,0},
       // new=[100vw,0]
       // done,
