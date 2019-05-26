@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import { SCENE } from '../enums'
+import { SCENE } from '../../../common/enums'
 export default {
   data() {
     return {
@@ -128,7 +128,7 @@ export default {
   },
   methods: {
     comfirm() {
-      this.$emit('slideTo', SCENE.Start)
+      this.$store.commit('slideToScene', SCENE.Start)
       this.startAnimate = false
     }
   }

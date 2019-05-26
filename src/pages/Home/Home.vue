@@ -12,19 +12,19 @@
 </style>
 
 <template>
-  <div class="page home-page" :class="{'pink-theme':theme,'grey-theme':!theme}">
+  <div class="page home-page" :class="[`${theme}-theme`]">
     <SceneContainer :grid="[4,4]" :active="activeScene">
       <SceneWrap :position="SCENE_POS.Setting">
-        <SettingView @slideTo="slideTo" @changeTheme="theme=!theme"/>
+        <SettingView/>
       </SceneWrap>
       <SceneWrap :position="SCENE_POS.Start">
-        <StartView @slideTo="slideTo"/>
+        <StartView/>
       </SceneWrap>
       <SceneWrap :position="SCENE_POS.Run">
-        <RunView @slideTo="slideTo"/>
+        <RunView/>
       </SceneWrap>
       <SceneWrap :position="SCENE_POS.Finish">
-        <FinishView @slideTo="slideTo" v-if="activeScene.toString()===SCENE_POS.Finish.toString()"/>
+        <FinishView v-if="activeScene.toString()===SCENE_POS.Finish.toString()"/>
       </SceneWrap>
     </SceneContainer>
   </div>
@@ -37,8 +37,8 @@ import FinishView from './Scene/FinishView'
 import StartView from './Scene/StartView'
 import SettingView from './Scene/SettingView'
 import RunView from './Scene/RunView'
-
-import { SCENE_POS, SCENE } from './enums'
+import { SCENE_POS, SCENE } from '../../common/enums'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -52,15 +52,11 @@ export default {
   data() {
     return {
       SCENE,
-      SCENE_POS,
-      activeScene: SCENE_POS[SCENE.Start],
-      theme: false
+      SCENE_POS
     }
   },
-  methods: {
-    slideTo(scene) {
-      this.activeScene = SCENE_POS[scene]
-    }
+  computed: {
+    ...mapState(['theme', 'activeScene'])
   }
 }
 </script>

@@ -10,13 +10,13 @@
 </style>
 <template>
   <div class="setting-view">
-    <div @click="$emit('changeTheme')" class="piece">修改主题</div>
+    <div @click="changeTheme" class="piece">修改主题</div>
     <div @click="slideTo(SCENE.Start)" class="piece">返回</div>
   </div>
 </template>
 
 <script>
-import { SCENE } from '../enums'
+import { SCENE } from '../../../common/enums'
 export default {
   data() {
     return {
@@ -25,7 +25,10 @@ export default {
   },
   methods: {
     slideTo(scene) {
-      this.$emit('slideTo', scene)
+      this.$store.commit('slideToScene', scene)
+    },
+    changeTheme() {
+      this.$store.commit('setTheme', 'grey')
     }
   }
 }
