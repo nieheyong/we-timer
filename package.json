@@ -42,6 +42,7 @@
     "@dcloudio/webpack-uni-pages-loader": "*",
     "@types/html5plus": "*",
     "@types/uni-app": "*",
+    "@types/weixin-app": "^2.2.27",
     "@vue/cli-plugin-babel": "3.5.1",
     "@vue/cli-service": "^3.7.0",
     "babel-plugin-import": "^1.11.0",

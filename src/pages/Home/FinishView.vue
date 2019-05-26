@@ -9,8 +9,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fa5539;
-  background: linear-gradient(45deg, #fa5539, #f93251);
 }
 .main-content {
   width: 100%;
@@ -50,8 +48,8 @@
   .ring3 {
     width: 40%;
     padding-top: 40%;
-    background: rgba($color: #000000, $alpha: 0.02);
-    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2) inset;
+    background: rgba($color: #000000, $alpha: 0.03);
+    box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.2) inset;
   }
   .right-icon {
     width: 14%;

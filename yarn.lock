@@ -832,6 +832,11 @@
   dependencies:
     vue "^2.6.8"
 
+"@types/weixin-app@^2.2.27":
+  version "2.2.27"
+  resolved "https://registry.npm.taobao.org/@types/weixin-app/download/@types/weixin-app-2.2.27.tgz#f0235fe97b82e1ccdb8f5a133ebeee3b1da793e0"
+  integrity sha1-8CNf6XuC4czbj1oTPr7uOx2nk+A=
+
 "@vue/babel-helper-vue-jsx-merge-props@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/@vue/babel-helper-vue-jsx-merge-props/download/@vue/babel-helper-vue-jsx-merge-props-1.0.0.tgz#048fe579958da408fb7a8b2a3ec050b50a661040"

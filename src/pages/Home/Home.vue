@@ -1,71 +1,86 @@
-<style scoped>
-.main-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgb(253, 29, 29);
-  background: linear-gradient(60deg, #fa5539, #f93251);
-  overflow-y: auto;
-}
-.main {
-  width: 100%;
-}
-.piece {
-  padding: 20px 60px;
-  border-radius: 16px;
-  background: #ffffff22;
-  color: #fff;
-  font-size: 60px;
-  margin: 10px 20px;
-  font-weight: bolder;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.title {
-  font-size: 12px;
+<style lang="scss" scoped>
+.home-page {
+  display: block;
+  .screen-container {
+    width: 200vw;
+    height: 100%;
+    display: flex;
+    transform: translateX(0vw);
+    transition: all 0.4s;
+    &.active {
+      transform: translateX(-100vw);
+    }
+    .screen {
+      display: inline-block;
+      width: 100vw;
+      height: 100%;
+      position: relative;
+
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+  }
 }
 </style>
 
 <template>
-  <div class="container main-page">
-    <div class="main">
-      <div class="piece">
-        <span class="title">每轮</span>
-        <span class="number">00:20</span>
+  <div class="page home-page" :class="{'pink-theme':theme,'grey-theme':!theme}">
+    <div class="screen-container" :class="{active:active}">
+      <div class="screen">
+        <InitView @setting="theme=!theme" @start="active=true"/>
       </div>
-      <div class="piece">
-        <span class="title">总计</span>
-        <span class="number">08</span>
-      </div>
-      <div @click="view" class="piece">
-        <span class="title">休息</span>
-        <span class="number">00:10</span>
+      <div class="screen">
+        <FinishView v-if="active" @close="active=false"/>
       </div>
     </div>
-    <Success v-if="success" @close="success=false"/>
   </div>
 </template>
 
 <script>
-import Success from '../../components/Success'
+import FinishView from './FinishView'
+import InitView from './InitView'
+
 export default {
   components: {
-    Success
+    FinishView,
+    InitView
   },
   data() {
     return {
-      success: false
+      Scene: {
+        init: 'Init',
+        finish: 'FinishView'
+      },
+      active: false,
+      theme: false
+    }
+  },
+  onShareAppMessage(res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '一起来运动',
+      path: '/pages/Home/Home?id=123'
     }
   },
   methods: {
-    view() {
-      this.success = true
-
+    test() {
       const audio = uni.createInnerAudioContext()
       audio.src = '/static/audio/success.mp3'
       audio.play()
       audio.onEnded(audio.destroy)
+
+      wx.showShareMenu()
+    },
+    enterScreen() {
+      enterScreenCb()
     }
   }
 }
