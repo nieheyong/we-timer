@@ -7,14 +7,19 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     theme: 'pink',
-    activeScene: SCENE_POS.Start
+    activeScene: SCENE.Start
+  },
+  getters: {
+    activeScenePos(state) {
+      return SCENE_POS[state.activeScene]
+    }
   },
   mutations: {
     setTheme(state, payload) {
       state.theme = payload
     },
     slideToScene(state, sceneName) {
-      state.activeScene = SCENE_POS[sceneName]
+      state.activeScene = sceneName
     }
   }
 })

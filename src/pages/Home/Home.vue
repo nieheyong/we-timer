@@ -13,7 +13,7 @@
 
 <template>
   <div class="page home-page" :class="[`${theme}-theme`]">
-    <SceneContainer :grid="[4,4]" :active="activeScene">
+    <SceneContainer :grid="[4,4]" :active="activeScenePos">
       <SceneWrap :position="SCENE_POS.Setting">
         <SettingView/>
       </SceneWrap>
@@ -24,7 +24,7 @@
         <RunView/>
       </SceneWrap>
       <SceneWrap :position="SCENE_POS.Finish">
-        <FinishView v-if="activeScene.toString()===SCENE_POS.Finish.toString()"/>
+        <FinishView v-if="activeScenePos.toString()===SCENE_POS.Finish.toString()"/>
       </SceneWrap>
     </SceneContainer>
   </div>
@@ -38,7 +38,7 @@ import StartView from './Scene/StartView'
 import SettingView from './Scene/SettingView'
 import RunView from './Scene/RunView'
 import { SCENE_POS, SCENE } from '../../common/enums'
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -56,7 +56,8 @@ export default {
     }
   },
   computed: {
-    ...mapState(['theme', 'activeScene'])
+    ...mapState(['theme']),
+    ...mapGetters(['activeScenePos'])
   }
 }
 </script>
