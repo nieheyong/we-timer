@@ -9,11 +9,22 @@
   .color-piece {
     box-sizing: border-box;
     border: solid 1px rgba($color: #fff, $alpha: 0.8);
-    height: 10vw;
-    width: 10vw;
-    margin: 2px;
+    height: 16vw;
+    width: 16vw;
+    margin: 4px;
     border-radius: 6px;
     display: inline-block;
+  }
+  .confirm-btn {
+    margin: 0 auto;
+    width: 20%;
+    border-radius: 30px;
+    background: #fff;
+    padding: 15px 40px;
+    font-size: 20px;
+    text-align: center;
+    color: #333;
+    margin: 10px auto;
   }
 }
 </style>
@@ -28,8 +39,8 @@
         :key="color"
       ></div>
     </div>
-    <div @click="changeTheme" class="piece">修改主题</div>
-    <div @click="slideTo(SCENE.Start)" class="piece">返回</div>
+    <div @click="slideTo(SCENE.Start)" class="confirm-btn">返回</div>
+    <div @click="slideTo(SCENE.Finish)" class="confirm-btn">完成页</div>
   </div>
 </template>
 
