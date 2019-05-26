@@ -1,25 +1,33 @@
 <style lang="scss" scoped>
-.title {
-  font-size: 16px;
-  color: #eee;
-  font-weight: lighter;
-}
-.piece {
-  padding: 10px 60px;
-  border-radius: 16px;
-  background: #ffffff22;
-  color: #fff;
-  margin: 10px 20px;
-  font-weight: bolder;
+.init-view {
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  text-align: center;
+  .title {
+    font-size: 16px;
+    color: #eee;
+    font-weight: lighter;
+  }
+  .piece {
+    padding: 10px 60px;
+    border-radius: 16px;
+    background: #ffffff22;
+    color: #fff;
+    margin: 10px 20px;
+    font-weight: bolder;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  .number {
-    font-size: 60px;
-    @media (min-height: 800px) {
-      & {
-        font-size: 100px;
+    .number {
+      font-size: 60px;
+      @media (min-height: 800px) {
+        & {
+          font-size: 100px;
+        }
       }
     }
   }

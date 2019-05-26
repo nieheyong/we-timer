@@ -1,54 +1,52 @@
 <style lang="scss" scoped>
 .home-page {
   display: block;
+  overflow: hidden;
   .screen-container {
     width: 200vw;
-    height: 100%;
+    height: 200vh;
+    overflow: hidden;
     display: flex;
     transform: translateX(0vw);
     transition: all 0.4s;
     &.active {
       transform: translateX(-100vw);
     }
-    .screen {
-      display: inline-block;
-      width: 100vw;
-      height: 100%;
-      position: relative;
-
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-
-      display: inline-flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-    }
+  }
+  .screen {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
   }
 }
 </style>
 
 <template>
   <div class="page home-page" :class="{'pink-theme':theme,'grey-theme':!theme}">
-    <div class="screen-container" :class="{active:active}">
-      <div class="screen">
+    <!-- <div class="screen-container" :class="{active:active}"></div> -->
+    <SceneContainer>
+      <SceneWrap>
         <InitView @setting="theme=!theme" @start="active=true"/>
-      </div>
-      <div class="screen">
+      </SceneWrap>
+      <SceneWrap>
         <FinishView v-if="active" @close="active=false"/>
-      </div>
-    </div>
+      </SceneWrap>
+    </SceneContainer>
   </div>
 </template>
 
 <script>
 import FinishView from './Views/FinishView'
 import InitView from './Views/InitView'
+import SceneWrap from './Views/SceneWrap'
+import SceneContainer from './Views/SceneContainer'
 
 export default {
   components: {
     FinishView,
-    InitView
+    InitView,
+    SceneWrap,
+    SceneContainer
   },
   data() {
     return {
@@ -81,6 +79,12 @@ export default {
     },
     enterScreen() {
       enterScreenCb()
+    },
+    viewScene(direction) {
+      // let old={0,0},
+      // new=[100vw,0]
+      // done,
+      // new =00
     }
   }
 }
