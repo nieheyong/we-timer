@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import FinishView from './Views/FinishView'
-import InitView from './Views/InitView'
-import SceneWrap from './Views/SceneWrap'
-import SceneContainer from './Views/SceneContainer'
+import FinishView from './Scene/FinishView'
+import InitView from './Scene/InitView'
+import SceneWrap from '../../components/SceneWrap'
+import SceneContainer from '../../components/SceneContainer'
 
 const SCENE = {
   init: 'InitView',
