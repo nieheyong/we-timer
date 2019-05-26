@@ -3,18 +3,31 @@
   display: block;
   overflow: hidden;
 }
+.scene-wrap {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: absolute;
+}
 </style>
 
 <template>
   <div class="page home-page" :class="{'pink-theme':theme,'grey-theme':!theme}">
-    <SceneContainer>
-      <SceneWrap :slideTo="slideTo" :from="sceneFrom===SCENE.init" :to="sceneTo===SCENE.init">
-        <InitView @setting="theme=!theme" @start="active=true"/>
+    <SceneContainer :grid="[3,3]" :active="activeScene">
+      <SceneWrap :position="[0,0]">[0,0]</SceneWrap>
+      <SceneWrap :position="[0,1]">[0,1]</SceneWrap>
+      <SceneWrap :position="[0,2]">[0,2]</SceneWrap>
+      <SceneWrap :position="[1,0]">[1,0]</SceneWrap>
+      <SceneWrap :position="[1,2]">[1,2]</SceneWrap>
+      <SceneWrap :position="[2,0]">[2,0]</SceneWrap>
+      <SceneWrap :position="[2,2]">[2,2]</SceneWrap>
+
+      <SceneWrap :position="[1,1]">
+        <InitView @setting="activeScene=[0,1]" @start="activeScene=[2,1]"/>
       </SceneWrap>
-      <SceneWrap :slideTo="slideTo" :from="sceneFrom===SCENE.finish" :to="sceneTo===SCENE.finish">
-        <FinishView @close="active=false"/>
+      <SceneWrap :position="[2,1]">
+        <FinishView v-if="activeScene.toString()==='2,1'" @close="activeScene=[1,1]"/>
       </SceneWrap>
-      <SceneWrap :slideTo="slideTo" :from="false" :to="false">sdklgjklsajgjsk</SceneWrap>
     </SceneContainer>
   </div>
 </template>
@@ -40,6 +53,7 @@ export default {
   data() {
     return {
       SCENE,
+      activeScene: [1, 1],
       slideTo: 'bottom',
       sceneFrom: 'InitView',
       sceneTo: 'FinishView',
