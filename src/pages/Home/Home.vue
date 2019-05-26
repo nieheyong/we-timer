@@ -26,6 +26,9 @@
       <SceneWrap :position="SCENE_POS.Finish">
         <FinishView v-if="activeScenePos.toString()===SCENE_POS.Finish.toString()"/>
       </SceneWrap>
+      <SceneWrap :position="SCENE_POS.SetTime">
+        <SetTimeView/>
+      </SceneWrap>
     </SceneContainer>
   </div>
 </template>
@@ -37,6 +40,7 @@ import FinishView from './Scene/FinishView'
 import StartView from './Scene/StartView'
 import SettingView from './Scene/SettingView'
 import RunView from './Scene/RunView'
+import SetTimeView from './Scene/SetTimeView'
 import { SCENE_POS, SCENE } from '../../common/enums'
 import { mapState, mapMutations, mapGetters } from 'vuex'
 
@@ -47,7 +51,8 @@ export default {
     FinishView,
     StartView,
     SettingView,
-    RunView
+    RunView,
+    SetTimeView
   },
   data() {
     return {

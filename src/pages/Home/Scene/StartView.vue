@@ -36,17 +36,18 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     .piece {
+      flex: 1;
+      margin: 10px 20px;;
       padding: 10px 60px;
       border-radius: 16px;
       background: #d4c5c522;
       color: #fff;
-      margin: 0 4vw;
       font-weight: bolder;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       .title {
         font-size: 16px;
         color: #eee;
