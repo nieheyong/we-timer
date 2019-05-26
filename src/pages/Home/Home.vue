@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import FinishView from './FinishView'
-import InitView from './InitView'
+import FinishView from './Views/FinishView'
+import InitView from './Views/InitView'
 
 export default {
   components: {
