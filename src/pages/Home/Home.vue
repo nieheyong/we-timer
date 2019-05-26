@@ -21,7 +21,7 @@
         <StartView/>
       </SceneWrap>
       <SceneWrap :position="SCENE_POS.Run">
-        <RunView/>
+        <RunView v-if="activeScenePos.toString()===SCENE_POS.Run.toString()"/>
       </SceneWrap>
       <SceneWrap :position="SCENE_POS.Finish">
         <FinishView v-if="activeScenePos.toString()===SCENE_POS.Finish.toString()"/>
