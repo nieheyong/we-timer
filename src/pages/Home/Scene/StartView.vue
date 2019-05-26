@@ -36,9 +36,14 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    picker {
+      flex: 1;
+      margin: 10px 20px;
+      display: flex;
+      flex-direction: column;
+    }
     .piece {
       flex: 1;
-      margin: 10px 20px;;
       padding: 10px 60px;
       border-radius: 16px;
       background: #d4c5c522;
@@ -48,6 +53,11 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      transition: transform 0.3s;
+      &.hover {
+        transform: scale(1.05);
+        background: #d4c5c533;
+      }
       .title {
         font-size: 16px;
         color: #eee;
@@ -107,18 +117,35 @@
       <i class="iconfont icon-setting"></i>
     </div>
     <div class="piece-box">
-      <div class="piece">
-        <span class="title">次数</span>
-        <span class="number">08</span>
-      </div>
-      <div class="piece">
-        <span class="title">每次</span>
-        <span class="number">00:20</span>
-      </div>
-      <div class="piece"  @click="slideTo(SCENE.Finish)">
-        <span class="title">休息</span>
-        <span class="number">00:10</span>
-      </div>
+      <picker @change="countChange" :value="countIndex" :range="countRange">
+        <div class="piece" hover-class="hover" :hover-start-time="0">
+          <div class="title">次数</div>
+          <div class="number">{{countStr}}</div>
+        </div>
+      </picker>
+      <picker
+        mode="multiSelector"
+        @change="workTimeChange"
+        :value="workTimeIndex"
+        :range="timeRange"
+      >
+        <div class="piece" hover-class="hover" :hover-start-time="0">
+          <div class="title">每次</div>
+          <div class="number">{{workTimeStr}}</div>
+        </div>
+      </picker>
+
+      <picker
+        mode="multiSelector"
+        @change="restTimeChange"
+        :value="restTimeIndex"
+        :range="timeRange"
+      >
+        <div class="piece" hover-class="hover" :hover-start-time="0">
+          <div class="title">休息</div>
+          <div class="number">{{restTimeStr}}</div>
+        </div>
+      </picker>
     </div>
 
     <div class="bottom-box">
@@ -133,15 +160,63 @@
 <script>
 import { SCENE } from '../../../common/enums'
 import { mapState, mapMutations, mapGetters } from 'vuex'
+import { toTimeStr, toMinSec } from '../../../common/utils'
 export default {
   data() {
+    const genList = count =>
+      [...Array(count)].map((_, i) => i.toString().padStart(2, 0))
+    const timeRange = genList(60)
+    const countRange = genList(100).slice(1)
+
+    let countStr = '08'
+    let workTimeStr = '00:20'
+    let restTimeStr = '00:10'
+    const timeInfo = wx.getStorageSync('TimeInfo')
+    if (timeInfo) {
+      ;[countStr, workTimeStr, restTimeStr] = timeInfo
+    } else {
+      wx.setStorageSync('TimeInfo', [countStr, workTimeStr, restTimeStr])
+    }
+
     return {
-      SCENE
+      SCENE,
+      timeRange: [timeRange, timeRange],
+      countRange,
+      countStr,
+      countIndex: Number.parseInt(countStr) - 1,
+      workTimeStr,
+      workTimeIndex: toMinSec(workTimeStr),
+      restTimeStr,
+      restTimeIndex: toMinSec(restTimeStr)
     }
   },
   methods: {
     slideTo(scene) {
       this.$store.commit('slideToScene', scene)
+    },
+    countChange(e) {
+      this.countIndex = e.detail.value
+      this.countStr = this.countRange[this.countIndex]
+      this.saveTimeInfo()
+    },
+    workTimeChange(e) {
+      this.workTimeIndex = e.detail.value
+      const [min, sec] = this.workTimeIndex
+      this.workTimeStr = toTimeStr(min, sec)
+      this.saveTimeInfo()
+    },
+    restTimeChange(e) {
+      this.restTimeIndex = e.detail.value
+      const [min, sec] = this.restTimeIndex
+      this.restTimeStr = toTimeStr(min, sec)
+      this.saveTimeInfo()
+    },
+    saveTimeInfo() {
+      wx.setStorageSync('TimeInfo', [
+        this.countStr,
+        this.workTimeStr,
+        this.restTimeStr
+      ])
     }
   },
   computed: {

@@ -50,7 +50,6 @@ const themeColors = [
   'linear-gradient(to top, rgb(229, 57, 53), rgb(227, 93, 91))',
   'linear-gradient(to bottom, #243b55, #141e30)',
   'linear-gradient(to bottom, #734b6d, #42275a)',
-  'linear-gradient(to bottom, #734b6d, #42275a)',
   'linear-gradient(to bottom, #535562, #343641)',
   'linear-gradient(to top, rgb(44, 62, 80), rgb(52, 152, 219))'
 ]

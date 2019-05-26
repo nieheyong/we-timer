@@ -23,3 +23,14 @@ export const checkForUpdate = () => {
     console.log('app update failed: ', res.hasUpdate)
   })
 }
+
+export const toTimeStr = (min, sec) => {
+  min = min.toString().padStart(2, '0')
+  sec = sec.toString().padStart(2, '0')
+  return min + ':' + sec
+}
+
+export const toMinSec = timeStr => {
+  const [min, sec] = timeStr.split(':')
+  return [Number.parseInt(min), Number.parseInt(sec)]
+}
