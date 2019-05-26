@@ -35,7 +35,7 @@
 </style>
 <template>
   <div class="init-view">
-    <div @click="$emit('setting')" class="piece">
+    <div @click="slideTo(SCENE.Setting)" class="piece">
       <span class="title">次数</span>
       <span class="number">08</span>
     </div>
@@ -43,7 +43,7 @@
       <span class="title">每次</span>
       <span class="number">00:20</span>
     </div>
-    <div @click="$emit('start')" class="piece">
+    <div @click="slideTo(SCENE.Finish)" class="piece">
       <span class="title">休息</span>
       <span class="number">00:10</span>
     </div>
@@ -56,5 +56,17 @@
 </template>
 
 <script>
-export default {}
+import { SCENE } from '../enums'
+export default {
+  data() {
+    return {
+      SCENE
+    }
+  },
+  methods: {
+    slideTo(scene) {
+      this.$emit('slideTo', scene)
+    }
+  }
+}
 </script>
