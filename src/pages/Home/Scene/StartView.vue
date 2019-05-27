@@ -7,6 +7,9 @@
   box-sizing: border-box;
   // justify-content: center;
   text-align: center;
+  .invalid-color {
+    color: rgba($color: #fff, $alpha: 0.3);
+  }
   .statusbar {
     height: 44;
     width: 100%;
@@ -131,7 +134,7 @@
       >
         <div class="piece" hover-class="hover" :hover-start-time="0">
           <div class="title">每次</div>
-          <div class="number">{{workTimeStr}}</div>
+          <div class="number" :class="{'invalid-color':workTimeInvalid}">{{workTimeStr}}</div>
         </div>
       </picker>
 
@@ -143,14 +146,18 @@
       >
         <div class="piece" hover-class="hover" :hover-start-time="0">
           <div class="title">休息</div>
-          <div class="number">{{restTimeStr}}</div>
+          <div class="number" :class="{'invalid-color':restTimeInvalid}">{{restTimeStr}}</div>
         </div>
       </picker>
     </div>
 
     <div class="bottom-box">
       <div class="tip">共 03:50 分钟</div>
-      <div class="start-btn" @click="slideTo(SCENE.Run)">
+      <div
+        @click="slideTo(SCENE.Run)"
+        :class="{'invalid-color':restTimeInvalid||workTimeInvalid}"
+        class="start-btn"
+      >
         <i class="iconfont icon-go-right"></i>
       </div>
     </div>
@@ -190,6 +197,16 @@ export default {
       restTimeIndex: toMinSec(restTimeStr)
     }
   },
+  computed: {
+    ...mapState(['activeScene', 'isSliding']),
+    ...mapGetters(['titleBarBtnTop']),
+    workTimeInvalid() {
+      return this.workTimeStr === '00:00'
+    },
+    restTimeInvalid() {
+      return this.restTimeStr === '00:00'
+    }
+  },
   methods: {
     slideTo(scene) {
       this.$store.commit('slideToScene', scene)
@@ -218,10 +235,6 @@ export default {
         this.restTimeStr
       ])
     }
-  },
-  computed: {
-    ...mapState(['activeScene', 'isSliding']),
-    ...mapGetters(['titleBarBtnTop'])
   }
 }
 </script>
