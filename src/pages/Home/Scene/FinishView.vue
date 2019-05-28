@@ -36,20 +36,20 @@
   .ring1 {
     width: 80%;
     padding-top: 80%;
-    background: rgba($color: #000000, $alpha: 0.02);
-    box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.2) inset;
+    background: rgba($color: #000, $alpha: 0.05);
+    box-shadow: 0 0 5px rgba($color: #000, $alpha: 0.2) inset;
   }
   .ring2 {
     width: 60%;
     padding-top: 60%;
-    background: rgba($color: #000000, $alpha: 0.02);
-    box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.3) inset;
+    background: rgba($color: #000, $alpha: 0.05);
+    box-shadow: 0 0 2px rgba($color: #000, $alpha: 0.3) inset;
   }
   .ring3 {
     width: 40%;
     padding-top: 40%;
-    background: rgba($color: #000000, $alpha: 0.03);
-    box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.4) inset;
+    background: rgba($color: #000, $alpha: 0.05);
+    box-shadow: 0 0 5px rgba($color: #000, $alpha: 0.4) inset;
   }
   .right-icon {
     width: 14%;

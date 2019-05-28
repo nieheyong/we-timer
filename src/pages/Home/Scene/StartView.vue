@@ -7,9 +7,6 @@
   box-sizing: border-box;
   // justify-content: center;
   text-align: center;
-  .invalid-color {
-    color: rgba($color: #fff, $alpha: 0.3);
-  }
   .statusbar {
     height: 44;
     width: 100%;
@@ -49,7 +46,7 @@
       flex: 1;
       padding: 10px 60px;
       border-radius: 16px;
-      background: #d4c5c522;
+      background: rgba($color: #d4c5c5, $alpha: 0.15);
       color: #fff;
       font-weight: bolder;
       display: flex;
@@ -59,7 +56,7 @@
       transition: transform 0.3s;
       &.hover {
         transform: scale(1.05);
-        background: #d4c5c533;
+        background: rgba($color: #d4c5c5, $alpha: 0.3);
       }
       .title {
         font-size: 16px;
@@ -98,7 +95,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #d4c5c566;
+      background: rgba($color: #d4c5c5, $alpha: 0.5);
       color: #eee;
       .iconfont {
         font-size: 80rpx;

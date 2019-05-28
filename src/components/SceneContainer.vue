@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
 .scene-container {
   overflow: hidden;
-  transition: all 0.5s;
+  transition: all 0.4s;
 }
 </style>
 

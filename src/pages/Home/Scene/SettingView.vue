@@ -14,6 +14,16 @@
     margin: 4px;
     border-radius: 6px;
     display: inline-block;
+    overflow: hidden;
+    position: relative;
+    & > div {
+      min-height: 300%;
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
   }
   .confirm-btn {
     margin: 0 auto;
@@ -33,11 +43,12 @@
     <div class="color-piece-container">
       <div
         v-for="color in themeColors"
-        :style="{background:color}"
         @click="setThemeColor(color)"
         class="color-piece"
         :key="color"
-      ></div>
+      >
+        <div :style="{background:color}"></div>
+      </div>
     </div>
     <div @click="slideTo(SCENE.Start)" class="confirm-btn">返回</div>
     <div @click="slideTo(SCENE.Finish)" class="confirm-btn">完成页</div>
