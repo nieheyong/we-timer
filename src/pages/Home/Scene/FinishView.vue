@@ -18,12 +18,12 @@
   padding-top: 80%;
   position: relative;
   &.animate-init {
-    transform: scale(0.5);
+    transform: translateY(-300px);
     opacity: 0.3;
   }
   &.animate {
     transition: all 1s;
-    transform: scale(1);
+    transform: translateY(0);
     opacity: 1;
   }
   .ring {
