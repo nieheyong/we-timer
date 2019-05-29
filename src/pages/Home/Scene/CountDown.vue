@@ -64,10 +64,7 @@
 <template>
   <div class="count-down" @click="comfirm">
     <div class="progress-bar" :style="{transform:`translateY(${percent}%)`}"></div>
-    <div
-      :class="{'prepare-active':isPrepare,'work-active':isWork,'rest-active':isRest,}"
-      class="time-ct"
-    >
+    <div :class="[`${status}-active`]" class="time-ct">
       <div class="prepare-time">{{prepareTimeStr}}</div>
       <div class="work-time">{{workTimeStr}}</div>
       <div class="rest-time">{{restTimeStr}}</div>
@@ -79,13 +76,18 @@
 <script>
 import { SCENE } from '../../../common/enums'
 import { secToTimeStr, delay } from '../../../common/utils'
+// 'Prepare 'Work Rest
+
+const STATUS = {
+  prepare: 'prepare',
+  work: 'work',
+  rest: 'rest'
+}
 
 export default {
   data() {
     return {
-      isPrepare: true,
-      isWork: false,
-      isRest: false,
+      status: STATUS.prepare,
       remain: {
         prepareSec: 3,
         workSec: 30,
@@ -144,7 +146,6 @@ export default {
       const extraMs = expireMs % 1000
       const expireSec = Math.floor(expireMs / 1000)
       if (expireSec < PREP_SEC) {
-        this.isPrepare = true
         const remainPrepareSec = PREP_SEC - expireSec
         this.percent =
           100 - ((remainPrepareSec * 1000 - extraMs) / (PREP_SEC * 1000)) * 100
@@ -152,24 +153,23 @@ export default {
           this.warn('prepare', remainPrepareSec, 'ding.mp3')
         }
         remain.prepareSec = remainPrepareSec
+        this.status = STATUS.prepare
       } else {
         remain.prepareSec = 0
         const startSec = expireSec - PREP_SEC
-        this.isPrepare = false
         const ONE_COUNT_SEC = WORK_SEC + REST_SEC
         this.currentCount = Math.floor(startSec / ONE_COUNT_SEC) + 1
-
         const tempSec = startSec % ONE_COUNT_SEC
         if (tempSec === 0) {
-          this.warn('start', this.currentCount, 'dong.mp3')
+          this.warn('workStart', this.currentCount, 'dong.mp3')
         }
+
         if (tempSec < WORK_SEC) {
           remain.restSec = 0
           remain.workSec = WORK_SEC - tempSec
           this.percent =
             ((remain.workSec * 1000 - extraMs) / (WORK_SEC * 1000)) * 100
-          this.isRest = false
-          this.isWork = true
+          this.status = STATUS.work
         } else {
           if (this.currentCount === COUNT) {
             remain.workSec = 0
@@ -179,13 +179,12 @@ export default {
             this.$emit('finish')
             return
           }
+          this.warn('restStart', this.currentCount, 'rest.mp3')
+          this.status = STATUS.rest
           remain.workSec = 0
-          this.warn('rest', this.currentCount, 'rest.mp3')
           const remainRestSec = REST_SEC - (tempSec - WORK_SEC)
           this.percent =
             100 - ((remainRestSec * 1000 - extraMs) / (REST_SEC * 1000)) * 100
-          this.isRest = true
-          this.isWork = false
           if ([3, 2, 1].includes(remainRestSec)) {
             this.warn(this.currentCount, remainRestSec, 'ding.mp3')
           }
