@@ -14,7 +14,8 @@ const store = new Vuex.Store({
     themeColor: themeColor,
     activeScene: SCENE.Start,
     isSliding: false,
-    sysInfo: wx.getSystemInfoSync()
+    sysInfo: wx.getSystemInfoSync(),
+    countDownParams: null
   },
   getters: {
     activeScenePos(state) {
@@ -35,6 +36,9 @@ const store = new Vuex.Store({
     },
     setIsSliding(state, payload) {
       state.isSliding = payload
+    },
+    setCountDownParams(state, payload) {
+      state.countDownParams = payload
     }
   }
 })

@@ -69,6 +69,7 @@
       <div class="work-time">{{workTimeStr}}</div>
       <div class="rest-time">{{restTimeStr}}</div>
     </div>
+    {{currentCount}}/{{params.COUNT}}
     <div class="pause-btn" @click.stop="togglePause">暂停</div>
   </div>
 </template>
@@ -101,7 +102,8 @@ export default {
 
   computed: {
     params() {
-      return { PREP_SEC: 3, COUNT: 4, WORK_SEC: 20, REST_SEC: 10 }
+      return this.$store.state.countDownParams
+      // return { PREP_SEC: 3, COUNT: 4, WORK_SEC: 20, REST_SEC: 10 }
     },
     prepareTimeStr() {
       return this.remain.prepareSec.toString().padStart(2, 0)
@@ -117,19 +119,23 @@ export default {
     this.runing = true
     this.startTime = Date.now()
     this.startCountDown()
+    this.keepScreenOn()
   },
   beforeDestroy() {
     this.runing = false
+    this.keepScreenOn(false)
   },
   methods: {
     togglePause() {
       if (!this.pauseTime) {
+        this.keepScreenOn(false)
         this.pauseTime = Date.now()
       } else {
         this.delayMs = Date.now() - this.pauseTime
         this.startTime = this.startTime + this.delayMs
         this.pauseTime = null
         this.startCountDown()
+        this.keepScreenOn()
       }
     },
     async startCountDown() {
@@ -210,6 +216,11 @@ export default {
       audio.src = '/static/audio/' + name
       audio.play()
       audio.onEnded(audio.destroy)
+    },
+    keepScreenOn(sta = true) {
+      wx.setKeepScreenOn({
+        keepScreenOn: sta
+      })
     }
   }
 }

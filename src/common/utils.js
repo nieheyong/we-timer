@@ -35,6 +35,11 @@ export const secToTimeStr = sec => {
   return toTimeStr(min, sec % 60)
 }
 
+export const timeStrToSec = timeStr => {
+  const [min, sec] = toMinSec(timeStr)
+  return min * 60 + sec
+}
+
 export const toMinSec = timeStr => {
   const [min, sec] = timeStr.split(':')
   return [Number.parseInt(min), Number.parseInt(sec)]

@@ -130,7 +130,7 @@
         :range="timeRange"
       >
         <div class="piece" hover-class="hover" :hover-start-time="0">
-          <div class="title">每次</div>
+          <div class="title">运动</div>
           <div class="number" :class="{'invalid-color':workTimeInvalid}">{{workTimeStr}}</div>
         </div>
       </picker>
@@ -151,7 +151,7 @@
     <div class="bottom-box">
       <div class="tip">共 03:50 分钟</div>
       <div
-        @click="slideTo(SCENE.Run)"
+        @click="startCountDown"
         :class="{'invalid-color':restTimeInvalid||workTimeInvalid}"
         class="start-btn"
       >
@@ -164,7 +164,7 @@
 <script>
 import { SCENE } from '../../../common/enums'
 import { mapState, mapMutations, mapGetters } from 'vuex'
-import { toTimeStr, toMinSec } from '../../../common/utils'
+import { toTimeStr, toMinSec, timeStrToSec } from '../../../common/utils'
 export default {
   data() {
     const genList = count =>
@@ -205,6 +205,15 @@ export default {
     }
   },
   methods: {
+    startCountDown() {
+      this.$store.commit('setCountDownParams', {
+        PREP_SEC: 3,
+        COUNT: Number.parseInt(this.countStr),
+        WORK_SEC: timeStrToSec(this.workTimeStr),
+        REST_SEC: timeStrToSec(this.restTimeStr)
+      })
+      this.slideTo(SCENE.Run)
+    },
     slideTo(scene) {
       this.$store.commit('slideToScene', scene)
     },
