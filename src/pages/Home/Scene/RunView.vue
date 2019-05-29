@@ -7,14 +7,15 @@
   justify-content: center;
   position: relative;
 
-  .bar {
+  .progress-bar {
     position: absolute;
-    bottom: 0;
+    left: 0;
+    top: 0;
     width: 100%;
-    height: 0%;
+    height: 100%;
     background: rgba($color: #fff, $alpha: 0.1);
-    // transition: all 0.2s;
-    // transition-timing-function: linear;
+    transition: all 0.13s;
+    transition-timing-function: linear;
   }
   .time-ct {
     transition: all 0.5s;
@@ -56,7 +57,7 @@
 
 <template>
   <div class="run-view" @click="comfirm">
-    <div class="bar" :style="{height:percent+'%'}"></div>
+    <div class="progress-bar" :style="{transform:`translateY(${percent}%)`}"></div>
     <div
       @click.stop="rest=!rest"
       :class="{'prepare-active':isPrepare,'work-active':isWork,'rest-active':isRest,}"
@@ -111,7 +112,7 @@ export default {
     async countDown() {
       this.startTime = Date.now()
       while (true) {
-        await delay(50)
+        await delay(130)
         this.updateUi()
       }
     },
@@ -137,10 +138,10 @@ export default {
         }
         const temp1 = startSec % ONE_COUNT_SEC
         if (temp1 < workSec) {
+          this.remain.restSec = 0
           this.remain.workSec = workSec - temp1
           this.percent =
             ((this.remain.workSec * 1000 - extraMs) / (workSec * 1000)) * 100
-          this.remain.restSec = restSec
           this.isRest = false
           this.isWork = true
         } else {
