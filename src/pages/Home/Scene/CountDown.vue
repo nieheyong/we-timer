@@ -53,24 +53,56 @@
       }
     }
   }
-  .pause-btn {
-    padding: 20px;
-    background: rgba($color: #fff, $alpha: 0.5);
+
+  .bottom-box {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 30px;
+    .tip {
+      padding: 20px;
+      font-size: 20px;
+    }
+    .operate-btn {
+      width: 18vw;
+      height: 18vw;
+      font-size: 12vw;
+      background: rgba($color: #fff, $alpha: 0.5);
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px;
+      border-radius: 50%;
+    }
   }
 }
 </style>
 
 <template>
-  <div class="count-down" @click="comfirm">
+  <div class="count-down">
     <div class="progress-bar" :style="{transform:`translateY(${percent}%)`}"></div>
     <div :class="[`${status}-active`]" class="time-ct">
       <div class="prepare-time">{{prepareTimeStr}}</div>
       <div class="work-time">{{workTimeStr}}</div>
       <div class="rest-time">{{restTimeStr}}</div>
     </div>
-    {{currentCount}}/{{params.COUNT}}
-    <div class="pause-btn" @click.stop="togglePause">暂停</div>
+
+    <div class="bottom-box">
+      <div class="tip">{{currentCount}}/{{params.COUNT}}</div>
+      <div>
+        <div v-if="pauseTime" class="operate-btn" @click.stop="cancle">
+          <i class="iconfont icon-stop"></i>
+        </div>
+        <div class="operate-btn" @click.stop="togglePause">
+          <i class="iconfont" :class="{'icon-pause':!pauseTime,'icon-play':pauseTime}"></i>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -96,7 +128,8 @@ export default {
       },
       finish: false,
       percent: 0,
-      currentCount: 1
+      currentCount: 1,
+      pauseTime: null
     }
   },
 
@@ -198,7 +231,7 @@ export default {
         }
       }
     },
-    comfirm() {
+    cancle() {
       this.$store.commit('slideToScene', SCENE.Start)
     },
     warn(prefix, id, fileName) {

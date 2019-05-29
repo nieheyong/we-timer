@@ -9,6 +9,17 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-pause:before {
+  content: '\e67e';
+}
+
+.icon-play:before {
+  content: '\e689';
+}
+
+.icon-stop:before {
+  content: '\e6a3';
+}
 
 .icon-setting:before {
   content: '\e63f';
