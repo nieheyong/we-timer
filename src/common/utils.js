@@ -50,3 +50,10 @@ export const isSceneInScreen = (scene, fromScene, activeScene, isSliding) => {
   const isLeaveing = fromScene.name === scene.name && isSliding
   return isActive || isLeaveing
 }
+
+export const playAudio = fileName => {
+  const audio = uni.createInnerAudioContext()
+  audio.src = '/static/audio/' + fileName
+  audio.play()
+  audio.onEnded(audio.destroy)
+}

@@ -124,29 +124,12 @@
 
 <script>
 import { SCENE } from '../../../common/enums'
-import { secToTimeStr, delay } from '../../../common/utils'
-// 'Prepare 'Work Rest
+import { secToTimeStr, delay, playAudio } from '../../../common/utils'
 
 const STATUS = {
   prepare: 'prepare',
   work: 'work',
   rest: 'rest'
-}
-const createAudio = fileName => {
-  const audio = uni.createInnerAudioContext()
-  audio.src = '/static/audio/' + fileName
-  const replay = () => {
-    audio.stop()
-    audio.play()
-  }
-  return replay
-}
-
-const AudioPlay = {
-  'ding.mp3': createAudio('ding.mp3'),
-  'dong.mp3': createAudio('dong.mp3'),
-  'rest.mp3': createAudio('rest.mp3'),
-  'success.mp3': createAudio('success.mp3')
 }
 
 export default {
@@ -245,7 +228,7 @@ export default {
             remain.workSec = 0
             this.percent = 0
             this.finish = true
-            AudioPlay['success.mp3']()
+            playAudio('success.mp3')
             this.$emit('finish')
             return
           }
@@ -272,7 +255,7 @@ export default {
       }
       if (!this.warnMap[key]) {
         this.warnMap[key] = true
-        AudioPlay[fileName]()
+        playAudio(fileName)
       }
     },
     keepScreenOn(sta = true) {
