@@ -10,7 +10,7 @@
     <div
       class="scene-container"
       @transitionend="$emit('transitionend')"
-      :style="{width:width+'vw',height:height+'vh',transform:`translate(-${translate.x}vw,-${translate.y}vh)`}"
+      :style="{width:width+'vw',height:height+'vh',transform:translate}"
     >
       <slot/>
     </div>
@@ -39,10 +39,7 @@ export default {
     },
     translate() {
       const [x, y] = this.active
-      return {
-        x: x * 100,
-        y: y * 100
-      }
+      return `translate(-${x * 100}vw,-${y * 100}vh)`
     }
   }
 }

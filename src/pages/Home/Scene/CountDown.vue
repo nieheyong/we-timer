@@ -210,7 +210,7 @@ export default {
             ((remain.workSec * 1000 - extraMs) / (WORK_SEC * 1000)) * 100
           this.status = STATUS.work
         } else {
-          if (this.currentCount === COUNT) {
+          if (this.currentCount >= COUNT) {
             remain.workSec = 0
             this.percent = 0
             this.finish = true
