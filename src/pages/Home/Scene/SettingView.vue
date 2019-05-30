@@ -51,7 +51,6 @@
       </div>
     </div>
     <div @click="slideTo(SCENE.Start)" class="confirm-btn">返回</div>
-    <div @click="slideTo(SCENE.Finish)" class="confirm-btn">完成页</div>
   </div>
 </template>
 

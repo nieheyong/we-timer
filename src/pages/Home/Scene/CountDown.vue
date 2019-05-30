@@ -116,6 +116,22 @@ const STATUS = {
   work: 'work',
   rest: 'rest'
 }
+const createAudio = fileName => {
+  const audio = uni.createInnerAudioContext()
+  audio.src = '/static/audio/' + fileName
+  const replay = () => {
+    audio.stop()
+    audio.play()
+  }
+  return replay
+}
+
+const AudioPlay = {
+  'ding.mp3': createAudio('ding.mp3'),
+  'dong.mp3': createAudio('dong.mp3'),
+  'rest.mp3': createAudio('rest.mp3'),
+  'success.mp3': createAudio('success.mp3')
+}
 
 export default {
   data() {
@@ -214,7 +230,7 @@ export default {
             remain.workSec = 0
             this.percent = 0
             this.finish = true
-            this.playVoice('success.mp3')
+            AudioPlay['success.mp3']()
             this.$emit('finish')
             return
           }
@@ -241,14 +257,8 @@ export default {
       }
       if (!this.warnMap[key]) {
         this.warnMap[key] = true
-        this.playVoice(fileName)
+        AudioPlay[fileName]()
       }
-    },
-    playVoice(name) {
-      const audio = uni.createInnerAudioContext()
-      audio.src = '/static/audio/' + name
-      audio.play()
-      audio.onEnded(audio.destroy)
     },
     keepScreenOn(sta = true) {
       wx.setKeepScreenOn({
