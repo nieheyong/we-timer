@@ -13,7 +13,7 @@
 
 <template>
   <div class="page home-page" :style="{background:themeColor}">
-    <SceneContainer :grid="[3,3]" :active="activeScene.position" @transitionend="transitionend">
+    <SceneContainer :grid="[3,1]" :active="activeScene.position" @transitionend="transitionend">
       <SceneWrap :sceneInfo="SCENE.Setting">
         <SettingView/>
       </SceneWrap>
@@ -28,13 +28,14 @@
 </template>
 
 <script>
-import SceneWrap from '../../components/SceneWrap'
-import SceneContainer from '../../components/SceneContainer'
+import { mapState } from 'vuex'
+import SceneWrap from '@/components/SceneWrap'
+import SceneContainer from '@/components/SceneContainer'
 import StartView from './Scene/StartView'
 import SettingView from './Scene/SettingView'
 import RunView from './Scene/RunView'
 import { SCENE } from '../../common/enums'
-import { mapState, mapMutations, mapGetters } from 'vuex'
+import { isSceneInScreen } from '../../common/utils'
 
 export default {
   components: {
@@ -52,10 +53,12 @@ export default {
   computed: {
     ...mapState(['themeColor', 'isSliding', 'fromScene', 'activeScene']),
     showRunView() {
-      const name = SCENE.Run.name
-      const isActive = this.activeScene.name === name
-      const isFrom = this.fromScene.name === name && this.isSliding
-      return isActive || isFrom
+      return isSceneInScreen(
+        SCENE.Run,
+        this.fromScene,
+        this.activeScene,
+        this.isSliding
+      )
     }
   },
   methods: {

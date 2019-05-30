@@ -44,3 +44,9 @@ export const toMinSec = timeStr => {
   const [min, sec] = timeStr.split(':')
   return [Number.parseInt(min), Number.parseInt(sec)]
 }
+
+export const isSceneInScreen = (scene, fromScene, activeScene, isSliding) => {
+  const isActive = activeScene.name === scene.name
+  const isLeaveing = fromScene.name === scene.name && isSliding
+  return isActive || isLeaveing
+}

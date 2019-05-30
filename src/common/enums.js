@@ -1,7 +1,7 @@
 export const SCENE = {
   Setting: {
     name: 'Setting',
-    position: [0, 0]
+    position: [0, 0] //[x,y]
   },
   Start: {
     name: 'Start',

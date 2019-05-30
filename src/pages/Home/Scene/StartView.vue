@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  // justify-content: center;
   text-align: center;
   .statusbar {
     height: 44;
@@ -18,8 +17,8 @@
     position: absolute;
     left: 7pt;
     bottom: 24pt;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     border: solid 1px rgba($color: #fff, $alpha: 0.1);
     display: flex;
@@ -106,8 +105,8 @@
 }
 </style>
 <template>
-  <div class="init-view" :style="{'padding-top':`${titleBarBtnTop+40}px`}">
-    <!-- <div class="statusbar" :style="{height:`${titleBarBtnTop}px`}">222</div> -->
+  <div class="init-view" :style="{'padding-top':`${titleBarBtnTop+32}px`}">
+    <!-- <div class="statusbar" :style="{height:`${titleBarBtnTop}px`}"></div> -->
     <div
       class="setting-btn"
       :style="{top:`${titleBarBtnTop}px`}"
@@ -163,7 +162,7 @@
 
 <script>
 import { SCENE } from '../../../common/enums'
-import { mapState, mapMutations, mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { toTimeStr, toMinSec, timeStrToSec } from '../../../common/utils'
 export default {
   data() {

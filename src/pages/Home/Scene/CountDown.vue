@@ -168,7 +168,6 @@ export default {
   computed: {
     params() {
       return this.$store.state.countDownParams
-      // return { PREP_SEC: 3, COUNT: 4, WORK_SEC: 20, REST_SEC: 10 }
     },
     prepareTimeStr() {
       return this.remain.prepareSec.toString().padStart(2, 0)

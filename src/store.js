@@ -20,7 +20,16 @@ const store = new Vuex.Store({
   },
   getters: {
     titleBarBtnTop(state) {
-      return state.sysInfo.statusBarHeight + 4
+      const model = state.sysInfo.model.toLowerCase()
+      const system = state.sysInfo.system.toLowerCase()
+      if (model.includes('iphone') && model.includes('x')) {
+        return 50
+      }
+      if (system.includes('ios')) {
+        return 26
+      } else {
+        return 28
+      }
     }
   },
   mutations: {
