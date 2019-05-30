@@ -1,7 +1,7 @@
 {
   "pages": [
     {
-      "path": "pages/Home/Home",
+      "path": "pages/Main",
       "style": {
         "disableScroll": true
       }

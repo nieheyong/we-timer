@@ -1,19 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { SCENE } from './common/enums'
-
+import * as config from './common/config'
 Vue.use(Vuex)
 
 let themeColor = wx.getStorageSync('ThemeColor')
 if (!themeColor) {
-  themeColor = 'linear-gradient(to bottom, #fa5539, #f93251)'
+  themeColor = config.defaultTheme
   wx.setStorage({ key: 'ThemeColor', data: themeColor })
 }
 const store = new Vuex.Store({
   state: {
     themeColor: themeColor,
-    fromScene: SCENE.Start,
-    activeScene: SCENE.Start,
+    fromScene: config.startScene,
+    activeScene: config.startScene,
     isSliding: false,
     sysInfo: wx.getSystemInfoSync(),
     countDownParams: null

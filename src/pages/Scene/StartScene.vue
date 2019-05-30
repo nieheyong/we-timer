@@ -161,9 +161,9 @@
 </template>
 
 <script>
-import { SCENE } from '../../../common/enums'
+import { SCENE } from '@/common/enums'
 import { mapState, mapGetters } from 'vuex'
-import { toTimeStr, toMinSec, timeStrToSec } from '../../../common/utils'
+import { toTimeStr, toMinSec, timeStrToSec } from '@/common/utils'
 export default {
   data() {
     const genList = count =>

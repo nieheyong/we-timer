@@ -15,13 +15,13 @@
   <div class="page home-page" :style="{background:themeColor}">
     <SceneContainer :grid="[3,1]" :active="activeScene.position" @transitionend="transitionend">
       <SceneWrap :sceneInfo="SCENE.Setting">
-        <SettingView/>
+        <SettingScene/>
       </SceneWrap>
       <SceneWrap :sceneInfo="SCENE.Start">
-        <StartView/>
+        <StartScene/>
       </SceneWrap>
       <SceneWrap :sceneInfo="SCENE.Run">
-        <RunView v-if="showRunView"/>
+        <RunScene v-if="showRunView"/>
       </SceneWrap>
     </SceneContainer>
   </div>
@@ -31,19 +31,19 @@
 import { mapState } from 'vuex'
 import SceneWrap from '@/components/SceneWrap'
 import SceneContainer from '@/components/SceneContainer'
-import StartView from './Scene/StartView'
-import SettingView from './Scene/SettingView'
-import RunView from './Scene/RunView'
-import { SCENE } from '../../common/enums'
-import { isSceneInScreen } from '../../common/utils'
+import StartScene from './Scene/StartScene'
+import SettingScene from './Scene/SettingScene'
+import RunScene from './Scene/RunScene/RunScene'
+import { SCENE } from '@/common/enums'
+import { isSceneInScreen } from '@/common/utils'
 
 export default {
   components: {
     SceneContainer,
     SceneWrap,
-    StartView,
-    SettingView,
-    RunView
+    StartScene,
+    SettingScene,
+    RunScene
   },
   data() {
     return {

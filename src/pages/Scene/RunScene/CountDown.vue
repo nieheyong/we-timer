@@ -123,8 +123,8 @@
 </template>
 
 <script>
-import { SCENE } from '../../../common/enums'
-import { secToTimeStr, delay, playAudio } from '../../../common/utils'
+import { SCENE } from '@/common/enums'
+import { secToTimeStr, delay, playAudio } from '@/common/utils'
 
 const STATUS = {
   prepare: 'prepare',
