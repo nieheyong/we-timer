@@ -63,7 +63,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
     .tip {
       padding: 20px;
       font-size: 20px;
@@ -76,8 +76,24 @@
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      margin: 20px;
       border-radius: 50%;
+      transition: all 0.3s;
+    }
+    .stop-btn {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(-40%) scale(0.2);
+      &.show {
+        visibility: initial;
+        opacity: 1;
+        transform: translateX(-40%) scale(1);
+      }
+    }
+    .pause-btn {
+      transform: translateX(-40%);
+      &.pause {
+        transform: translateX(40%) rotate(120deg);
+      }
     }
   }
 }
@@ -95,10 +111,10 @@
     <div class="bottom-box">
       <div class="tip">{{currentCount}}/{{params.COUNT}}</div>
       <div>
-        <div v-if="pauseTime" class="operate-btn" @click.stop="cancle">
+        <div @click.stop="cancle" :class="{show:pauseTime}" class="operate-btn stop-btn">
           <i class="iconfont icon-stop"></i>
         </div>
-        <div class="operate-btn" @click.stop="togglePause">
+        <div @click.stop="togglePause" :class="{pause:pauseTime}" class="operate-btn pause-btn">
           <i class="iconfont" :class="{'icon-pause':!pauseTime,'icon-play':pauseTime}"></i>
         </div>
       </div>

@@ -111,8 +111,8 @@
     <div
       class="setting-btn"
       :style="{top:`${titleBarBtnTop}px`}"
-      @click="slideTo(SCENE.Setting)"
-      v-if="activeScene.toString()=== SCENE.Start.toString()&&!isSliding"
+      @click="showSetting"
+      v-if="showSettingBtn"
     >
       <i class="iconfont icon-setting"></i>
     </div>
@@ -202,9 +202,15 @@ export default {
     },
     restTimeInvalid() {
       return this.restTimeStr === '00:00'
+    },
+    showSettingBtn() {
+      return this.activeScene.name === SCENE.Start.name && !this.isSliding
     }
   },
   methods: {
+    showSetting() {
+      this.slideTo(SCENE.Setting)
+    },
     startCountDown() {
       this.$store.commit('setCountDownParams', {
         PREP_SEC: 3,

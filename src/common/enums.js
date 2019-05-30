@@ -1,11 +1,14 @@
 export const SCENE = {
-  Start: 'Start',
-  Run: 'Run',
-  Setting: 'Setting'
-}
-
-export const SCENE_POS = {
-  Setting: [0, 1],
-  Start: [1, 1],
-  Run: [2, 1]
+  Setting: {
+    name: 'Setting',
+    position: [0, 0]
+  },
+  Start: {
+    name: 'Start',
+    position: [1, 0]
+  },
+  Run: {
+    name: 'Run',
+    position: [2, 0]
+  }
 }

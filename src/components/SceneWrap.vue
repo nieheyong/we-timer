@@ -16,13 +16,14 @@
 <script>
 export default {
   props: {
-    position: {}
+    sceneInfo: {}
   },
   computed: {
     pos() {
+      const { position } = this.sceneInfo
       return {
-        left: 100 * this.position[0],
-        top: 100 * this.position[1]
+        left: 100 * position[0],
+        top: 100 * position[1]
       }
     }
   }

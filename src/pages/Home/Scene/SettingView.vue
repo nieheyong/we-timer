@@ -50,7 +50,7 @@
         <div :style="{background:color}"></div>
       </div>
     </div>
-    <div @click="slideTo(SCENE.Start)" class="confirm-btn">返回</div>
+    <div @click="backToHome" class="confirm-btn">返回</div>
   </div>
 </template>
 
@@ -78,13 +78,12 @@ import { SCENE } from '../../../common/enums'
 export default {
   data() {
     return {
-      SCENE,
       themeColors
     }
   },
   methods: {
-    slideTo(scene) {
-      this.$store.commit('slideToScene', scene)
+    backToHome() {
+      this.$store.commit('slideToScene', SCENE.Start)
     },
     setThemeColor(color) {
       this.$store.commit('setThemeColor', color)

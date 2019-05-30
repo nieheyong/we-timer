@@ -13,15 +13,15 @@
 
 <template>
   <div class="page home-page" :style="{background:themeColor}">
-    <SceneContainer :grid="[3,3]" :active="activeScenePos" @transitionend="transitionend">
-      <SceneWrap :position="SCENE_POS.Setting">
+    <SceneContainer :grid="[3,3]" :active="activeScene.position" @transitionend="transitionend">
+      <SceneWrap :sceneInfo="SCENE.Setting">
         <SettingView/>
       </SceneWrap>
-      <SceneWrap :position="SCENE_POS.Start">
+      <SceneWrap :sceneInfo="SCENE.Start">
         <StartView/>
       </SceneWrap>
-      <SceneWrap :position="SCENE_POS.Run">
-        <RunView v-if="activeScenePos.toString()===SCENE_POS.Run.toString()"/>
+      <SceneWrap :sceneInfo="SCENE.Run">
+        <RunView v-if="showRunView"/>
       </SceneWrap>
     </SceneContainer>
   </div>
@@ -33,7 +33,7 @@ import SceneContainer from '../../components/SceneContainer'
 import StartView from './Scene/StartView'
 import SettingView from './Scene/SettingView'
 import RunView from './Scene/RunView'
-import { SCENE_POS, SCENE } from '../../common/enums'
+import { SCENE } from '../../common/enums'
 import { mapState, mapMutations, mapGetters } from 'vuex'
 
 export default {
@@ -46,13 +46,17 @@ export default {
   },
   data() {
     return {
-      SCENE,
-      SCENE_POS
+      SCENE
     }
   },
   computed: {
-    ...mapState(['themeColor']),
-    ...mapGetters(['activeScenePos'])
+    ...mapState(['themeColor', 'isSliding', 'fromScene', 'activeScene']),
+    showRunView() {
+      const name = SCENE.Run.name
+      const isActive = this.activeScene.name === name
+      const isFrom = this.fromScene.name === name && this.isSliding
+      return isActive || isFrom
+    }
   },
   methods: {
     transitionend() {

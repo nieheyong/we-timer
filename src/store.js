@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { SCENE, SCENE_POS } from './common/enums'
+import { SCENE } from './common/enums'
 
 Vue.use(Vuex)
 
@@ -12,15 +12,13 @@ if (!themeColor) {
 const store = new Vuex.Store({
   state: {
     themeColor: themeColor,
+    fromScene: SCENE.Start,
     activeScene: SCENE.Start,
     isSliding: false,
     sysInfo: wx.getSystemInfoSync(),
     countDownParams: null
   },
   getters: {
-    activeScenePos(state) {
-      return SCENE_POS[state.activeScene]
-    },
     titleBarBtnTop(state) {
       return state.sysInfo.statusBarHeight + 4
     }
@@ -30,8 +28,9 @@ const store = new Vuex.Store({
       state.themeColor = payload
       wx.setStorage({ key: 'ThemeColor', data: payload })
     },
-    slideToScene(state, sceneName) {
-      state.activeScene = sceneName
+    slideToScene(state, scene) {
+      state.fromScene = state.activeScene
+      state.activeScene = scene
       state.isSliding = true
     },
     setIsSliding(state, payload) {
