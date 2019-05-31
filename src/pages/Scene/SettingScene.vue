@@ -34,7 +34,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     width: 100%;
   }
 }

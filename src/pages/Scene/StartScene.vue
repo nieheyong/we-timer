@@ -82,7 +82,7 @@
     }
   }
   .bottom-box {
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     margin-top: 10px;
     .tip {
       margin-bottom: 20px;
