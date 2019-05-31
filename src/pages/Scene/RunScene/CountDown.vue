@@ -101,7 +101,7 @@
     </div>
 
     <div class="bottom-box">
-      <div class="tip">{{currentCount}}/{{params.COUNT}}</div>
+      <div class="tip">{{currentCount}}/{{params.count}}</div>
       <div>
         <div
           @click.stop="cancle"
@@ -156,7 +156,12 @@ export default {
 
   computed: {
     params() {
-      return this.$store.state.countDownParams
+      const [count, workTimeSec, restTimeSec] = uni.getStorageSync('TimeInfo')
+      return {
+        count,
+        workTimeSec,
+        restTimeSec
+      }
     }
   },
   mounted() {
@@ -190,7 +195,8 @@ export default {
       }
     },
     updateCountDown() {
-      const { PREP_SEC, COUNT, WORK_SEC, REST_SEC } = this.params
+      const PREP_SEC = 3
+      const { count, workTimeSec, restTimeSec } = this.params
       const remain = this.remain
       const expireMs = Date.now() - this.startTime
       const extraMs = expireMs % 1000
@@ -207,21 +213,21 @@ export default {
       } else {
         remain.prepareSec = 0
         const startSec = expireSec - PREP_SEC
-        const ONE_COUNT_SEC = WORK_SEC + REST_SEC
+        const ONE_COUNT_SEC = workTimeSec + restTimeSec
         this.currentCount = Math.floor(startSec / ONE_COUNT_SEC) + 1
         const tempSec = startSec % ONE_COUNT_SEC
         if (tempSec === 0) {
           this.warn('workStart', this.currentCount, 'dong.mp3')
         }
 
-        if (tempSec < WORK_SEC) {
+        if (tempSec < workTimeSec) {
           remain.restSec = 0
-          remain.workSec = WORK_SEC - tempSec
+          remain.workSec = workTimeSec - tempSec
           this.percent =
-            ((remain.workSec * 1000 - extraMs) / (WORK_SEC * 1000)) * 100
+            ((remain.workSec * 1000 - extraMs) / (workTimeSec * 1000)) * 100
           this.status = STATUS.work
         } else {
-          if (this.currentCount >= COUNT) {
+          if (this.currentCount >= count) {
             remain.workSec = 0
             this.percent = 0
             this.finish = true
@@ -232,9 +238,10 @@ export default {
           this.warn('restStart', this.currentCount, 'rest.mp3')
           this.status = STATUS.rest
           remain.workSec = 0
-          const remainRestSec = REST_SEC - (tempSec - WORK_SEC)
+          const remainRestSec = restTimeSec - (tempSec - workTimeSec)
           this.percent =
-            100 - ((remainRestSec * 1000 - extraMs) / (REST_SEC * 1000)) * 100
+            100 -
+            ((remainRestSec * 1000 - extraMs) / (restTimeSec * 1000)) * 100
           if ([3, 2, 1].includes(remainRestSec)) {
             this.warn(this.currentCount, remainRestSec, 'ding.mp3')
           }
@@ -256,7 +263,7 @@ export default {
       }
     },
     keepScreenOn(sta = true) {
-      wx.setKeepScreenOn({
+      uni.setKeepScreenOn({
         keepScreenOn: sta
       })
     }

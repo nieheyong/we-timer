@@ -164,11 +164,11 @@ export default {
     let count = 8
     let workTimeSec = 20
     let restTimeSec = 10
-    const timeInfo = wx.getStorageSync('TimeInfo')
+    const timeInfo = uni.getStorageSync('TimeInfo')
     if (timeInfo) {
       ;[count, workTimeSec, restTimeSec] = timeInfo
     } else {
-      wx.setStorageSync('TimeInfo', [count, workTimeSec, restTimeSec])
+      uni.setStorageSync('TimeInfo', [count, workTimeSec, restTimeSec])
     }
 
     return {
@@ -196,12 +196,6 @@ export default {
     },
     startCountDown() {
       if (!this.restTimeSec || !this.workTimeSec) return
-      this.$store.commit('setCountDownParams', {
-        PREP_SEC: 3,
-        COUNT: this.count,
-        WORK_SEC: this.workTimeSec,
-        REST_SEC: this.restTimeSec
-      })
       this.slideTo(SCENE.Run)
     },
     slideTo(scene) {
@@ -225,7 +219,7 @@ export default {
       this.saveTimeInfo()
     },
     saveTimeInfo() {
-      wx.setStorageSync('TimeInfo', [
+      uni.setStorageSync('TimeInfo', [
         this.count,
         this.workTimeSec,
         this.restTimeSec

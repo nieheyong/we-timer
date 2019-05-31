@@ -4,10 +4,10 @@ import { SCENE } from './common/enums'
 import * as config from './common/config'
 Vue.use(Vuex)
 
-let themeColor = wx.getStorageSync('ThemeColor')
+let themeColor = uni.getStorageSync('ThemeColor')
 if (!themeColor) {
   themeColor = config.defaultTheme
-  wx.setStorage({ key: 'ThemeColor', data: themeColor })
+  uni.setStorage({ key: 'ThemeColor', data: themeColor })
 }
 const store = new Vuex.Store({
   state: {
@@ -15,8 +15,7 @@ const store = new Vuex.Store({
     fromScene: config.startScene,
     activeScene: config.startScene,
     isSliding: false,
-    sysInfo: wx.getSystemInfoSync(),
-    countDownParams: null
+    sysInfo: uni.getSystemInfoSync()
   },
   getters: {
     titleBarBtnTop(state) {
@@ -36,7 +35,7 @@ const store = new Vuex.Store({
   mutations: {
     setThemeColor(state, payload) {
       state.themeColor = payload
-      wx.setStorage({ key: 'ThemeColor', data: payload })
+      uni.setStorage({ key: 'ThemeColor', data: payload })
     },
     slideToScene(state, scene) {
       state.fromScene = state.activeScene
@@ -45,9 +44,6 @@ const store = new Vuex.Store({
     },
     setIsSliding(state, payload) {
       state.isSliding = payload
-    },
-    setCountDownParams(state, payload) {
-      state.countDownParams = payload
     }
   }
 })

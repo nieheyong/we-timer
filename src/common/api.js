@@ -1,7 +1,7 @@
 const BASE_URL = 'http://test.com/api'
 
 function requestError() {
-  wx.showModal({
+  uni.showModal({
     content: '请求出错，请稍后重试',
     showCancel: false,
     confirmText: '确定',
@@ -11,7 +11,7 @@ function requestError() {
 
 const request = (url, method = 'GET', data = null, header = {}) =>
   new Promise((resolve, reject) => {
-    wx.request({
+    uni.request({
       url: url.includes('http') ? url : BASE_URL + url,
       method,
       data,
