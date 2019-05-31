@@ -16,6 +16,12 @@
     height: 100%;
     transition-timing-function: linear;
   }
+  .top-status-text {
+    color: rgba($color: #fff, $alpha: 0.7);
+    text-align: center;
+    font-size: 30px;
+    font-weight: normal;
+  }
   .time-ct {
     transition: all 0.5s;
     .work-time,
@@ -30,7 +36,7 @@
       font-size: 300rpx;
     }
     &.prepare-active {
-      transform: translateY(33%);
+      transform: translateY(-33%);
       .prepare-time {
         transform: scale(1);
         opacity: 1;
@@ -44,7 +50,7 @@
       }
     }
     &.rest-active {
-      transform: translateY(-33%);
+      transform: translateY(33%);
       .rest-time {
         transform: scale(1);
         opacity: 1;
@@ -94,10 +100,16 @@
       class="progress-bar"
       :style="{background:`linear-gradient(to bottom, rgba(0, 0, 0, 0) ${percent}%, rgba(255, 255, 255, 0.1) ${percent}%)`}"
     ></div>
+    <div class="top-status-text">
+      <div v-if="status===STATUS.prepare">预备</div>
+      <div v-if="status===STATUS.work">运动</div>
+      <div v-if="status===STATUS.rest">休息一下</div>
+    </div>
+
     <div :class="[`${status}-active`]" class="time-ct">
-      <div class="prepare-time">{{remain.prepareSec | padStart(2,'0')}}</div>
-      <div class="work-time">{{remain.workSec | secToTimeStr}}</div>
       <div class="rest-time">{{remain.restSec | secToTimeStr}}</div>
+      <div class="work-time">{{remain.workSec | secToTimeStr}}</div>
+      <div class="prepare-time">{{remain.prepareSec | padStart(2,'0')}}</div>
     </div>
 
     <div class="bottom-box">
@@ -141,7 +153,9 @@ const STATUS = {
 export default {
   data() {
     return {
+      STATUS,
       status: STATUS.prepare,
+
       remain: {
         prepareSec: 3,
         workSec: 30,

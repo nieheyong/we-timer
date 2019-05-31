@@ -87,6 +87,7 @@
     .tip {
       margin-bottom: 20px;
       color: #ddd;
+      font-size: 16px;
     }
   }
 }
@@ -135,7 +136,11 @@
     </div>
 
     <div class="bottom-box">
-      <div class="tip">共 03:50 分钟</div>
+      <div class="tip">
+        共
+        <span v-if="restTimeSec&&workTimeSec">{{totalSec | secToTimeStr}}</span>
+        <span v-else>xx:xx</span>
+      </div>
       <div
         @click="startCountDown"
         hover-class="hover"
@@ -188,6 +193,11 @@ export default {
     ...mapGetters(['titleBarBtnTop']),
     showSettingBtn() {
       return this.activeScene.name === SCENE.Start.name && !this.isSliding
+    },
+    totalSec() {
+      return (
+        this.count * (this.workTimeSec + this.restTimeSec) - this.restTimeSec
+      )
     }
   },
   methods: {

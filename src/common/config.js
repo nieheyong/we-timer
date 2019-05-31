@@ -1,6 +1,6 @@
 import { SCENE } from './enums'
 
-export const startScene = SCENE.Start
+export const startScene = SCENE.Run
 
 export const themeColors = [
   'linear-gradient(to bottom, #fa5539, #f93251)',
