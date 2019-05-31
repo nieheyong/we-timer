@@ -28,6 +28,9 @@ page {
   width: 20vw;
   height: 20vw;
   color: #fff;
+  &.hover {
+    background: rgba($color: #fff, $alpha: 0.3);
+  }
   .iconfont {
     position: absolute;
     top: 50%;
@@ -35,9 +38,17 @@ page {
     transform: translate(-50%, -50%);
     font-size: 12vw;
     font-weight: lighter;
+    transition: all 0.5s;
   }
   &.disable {
     background: rgba($color: #fff, $alpha: 0.1);
     color: rgba($color: #fff, $alpha: 0.2);
+  }
+  &.error {
+    background: rgba($color: #fff, $alpha: 0.1);
+    color: rgba($color: #fff, $alpha: 0.2);
+    .iconfont {
+      transform: translate(-50%, -50%) rotate(-90deg);
+    }
   }
 }

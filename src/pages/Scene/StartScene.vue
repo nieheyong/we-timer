@@ -21,12 +21,13 @@
     height: 32px;
     border-radius: 50%;
     border: solid 1px rgba($color: #fff, $alpha: 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: rgba($color: #000000, $alpha: 0.1);
     color: #fff;
     .iconfont {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       font-size: 18px;
       font-weight: lighter;
     }
@@ -137,7 +138,10 @@
       <div class="tip">共 03:50 分钟</div>
       <div
         @click="startCountDown"
-        :class="{'disable':restTimeInvalid||workTimeInvalid}"
+        hover-class="hover"
+        :hover-start-time="0"
+        :hover-delay-time="100"
+        :class="{'error':restTimeInvalid||workTimeInvalid}"
         class="circle-button"
       >
         <i class="iconfont icon-go-right"></i>
@@ -197,6 +201,7 @@ export default {
       this.slideTo(SCENE.Setting)
     },
     startCountDown() {
+      if (this.restTimeInvalid || this.workTimeInvalid) return
       this.$store.commit('setCountDownParams', {
         PREP_SEC: 3,
         COUNT: Number.parseInt(this.countStr),

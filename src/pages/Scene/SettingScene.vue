@@ -53,7 +53,13 @@
     </div>
 
     <div class="bottom-box">
-      <div @click="backToHome" class="circle-button">
+      <div
+        @click="backToHome"
+        hover-class="hover"
+        :hover-start-time="0"
+        :hover-delay-time="100"
+        class="circle-button"
+      >
         <i class="iconfont icon-tick"></i>
       </div>
     </div>

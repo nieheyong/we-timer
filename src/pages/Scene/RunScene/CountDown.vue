@@ -103,10 +103,24 @@
     <div class="bottom-box">
       <div class="tip">{{currentCount}}/{{params.COUNT}}</div>
       <div>
-        <div @click.stop="cancle" :class="{show:pauseTime}" class="circle-button btn-stop">
+        <div
+          @click.stop="cancle"
+          :class="{show:pauseTime}"
+          hover-class="hover"
+          :hover-start-time="0"
+          :hover-delay-time="100"
+          class="circle-button btn-stop"
+        >
           <i class="iconfont icon-stop"></i>
         </div>
-        <div @click.stop="togglePause" :class="{pause:pauseTime}" class="circle-button btn-pause">
+        <div
+          @click.stop="togglePause"
+          :class="{pause:pauseTime}"
+          hover-class="hover"
+          :hover-start-time="0"
+          :hover-delay-time="100"
+          class="circle-button btn-pause"
+        >
           <i class="iconfont" :class="{'icon-pause':!pauseTime,'icon-play':pauseTime}"></i>
         </div>
       </div>
