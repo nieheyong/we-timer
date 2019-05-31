@@ -20,8 +20,9 @@ const store = new Vuex.Store({
   },
   getters: {
     titleBarBtnTop(state) {
-      const model = state.sysInfo.model.toLowerCase()
-      const system = state.sysInfo.system.toLowerCase()
+      let { model, system } = state.sysInfo
+      model = model ? model.toLowerCase() : ''
+      system = system ? system.toLowerCase() : ''
       if (model.includes('iphone') && model.includes('x')) {
         return 50
       }

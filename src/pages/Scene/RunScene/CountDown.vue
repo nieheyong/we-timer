@@ -1,12 +1,12 @@
 <style lang="scss" scoped>
 .count-down {
-  height: 100vh;
-  width: 100vw;
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
+  width: 100vw;
+  height: 100vh;
 
   .progress-bar {
     position: absolute;
@@ -14,8 +14,6 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba($color: #fff, $alpha: 0.1);
-    transition: all 0.1s;
     transition-timing-function: linear;
   }
   .time-ct {
@@ -23,13 +21,13 @@
     .work-time,
     .rest-time,
     .prepare-time {
-      text-align: center;
-      font-size: 300rpx;
-      z-index: 1;
+      transform: scale(0.3);
       transition: inherit;
       opacity: 0;
-      transform: scale(0.3);
+      z-index: 1;
+      text-align: center;
       line-height: 0.75;
+      font-size: 300rpx;
     }
     &.prepare-active {
       transform: translateY(33%);
@@ -55,44 +53,44 @@
   }
 
   .bottom-box {
+    display: flex;
     position: absolute;
     bottom: 0;
-    width: 100%;
-    z-index: 1;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 1;
     padding-bottom: 50px;
+    width: 100%;
     .tip {
       padding: 20px;
       font-size: 20px;
     }
     .operate-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      border-radius: 50%;
+      background: rgba($color: #fff, $alpha: 0.5);
       width: 18vw;
       height: 18vw;
       font-size: 12vw;
-      background: rgba($color: #fff, $alpha: 0.5);
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      transition: all 0.3s;
     }
     .stop-btn {
       visibility: hidden;
       opacity: 0;
-      transform: translateX(-40%) scale(0.2);
+      transform: translateX(-50%) scale(0.2);
       &.show {
         visibility: initial;
         opacity: 1;
-        transform: translateX(-40%) scale(1);
+        transform: translateX(-50%) scale(1);
       }
     }
     .pause-btn {
-      transform: translateX(-40%);
+      transform: translateX(-50%);
       &.pause {
-        transform: translateX(40%) rotate(120deg);
+        transform: translateX(50%) rotate(120deg);
       }
     }
   }
@@ -101,7 +99,10 @@
 
 <template>
   <div class="count-down">
-    <div class="progress-bar" :style="{transform:`translateY(${percent}%)`}"></div>
+    <div
+      class="progress-bar"
+      :style="{background:`linear-gradient(to bottom, rgba(0, 0, 0, 0) ${percent}%, rgba(255, 255, 255, 0.1) ${percent}%)`}"
+    ></div>
     <div :class="[`${status}-active`]" class="time-ct">
       <div class="prepare-time">{{prepareTimeStr}}</div>
       <div class="work-time">{{workTimeStr}}</div>
@@ -187,7 +188,7 @@ export default {
     },
     async startCountDown() {
       while (true) {
-        await delay(100)
+        await delay(15)
         if (this.pauseTime || this.finish || !this.runing) return
         this.updateCountDown()
       }
