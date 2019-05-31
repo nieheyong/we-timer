@@ -117,10 +117,7 @@
       >
         <div class="piece" hover-class="hover" :hover-start-time="0">
           <div class="title">运动</div>
-          <div
-            class="number"
-            :class="{'invalid-color':workTimeInvalid}"
-          >{{workTimeSec | secToTimeStr}}</div>
+          <div class="number" :class="{'invalid':!workTimeSec}">{{workTimeSec | secToTimeStr}}</div>
         </div>
       </picker>
 
@@ -132,7 +129,7 @@
       >
         <div class="piece" hover-class="hover" :hover-start-time="0">
           <div class="title">休息</div>
-          <div class="number" :class="{'invalid':restTimeInvalid}">{{restTimeSec | secToTimeStr}}</div>
+          <div class="number" :class="{'invalid':!restTimeSec}">{{restTimeSec | secToTimeStr}}</div>
         </div>
       </picker>
     </div>
@@ -144,7 +141,7 @@
         hover-class="hover"
         :hover-start-time="0"
         :hover-delay-time="100"
-        :class="{'error':restTimeInvalid||workTimeInvalid}"
+        :class="{'error':!restTimeSec||!workTimeSec}"
         class="circle-button"
       >
         <i class="iconfont icon-go-right"></i>
@@ -189,12 +186,6 @@ export default {
   computed: {
     ...mapState(['activeScene', 'isSliding']),
     ...mapGetters(['titleBarBtnTop']),
-    workTimeInvalid() {
-      return this.workTimeSec === 0
-    },
-    restTimeInvalid() {
-      return this.restTimeSec === 0
-    },
     showSettingBtn() {
       return this.activeScene.name === SCENE.Start.name && !this.isSliding
     }
@@ -204,7 +195,7 @@ export default {
       this.slideTo(SCENE.Setting)
     },
     startCountDown() {
-      if (this.restTimeInvalid || this.workTimeInvalid) return
+      if (!this.restTimeSec || !this.workTimeSec) return
       this.$store.commit('setCountDownParams', {
         PREP_SEC: 3,
         COUNT: this.count,
