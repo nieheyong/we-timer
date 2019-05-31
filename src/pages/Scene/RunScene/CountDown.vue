@@ -77,11 +77,11 @@
       transition: all 0.3s;
       visibility: hidden;
       opacity: 0;
-      transform: translateX(-50%) scale(0.2);
+      transform: translateX(50%);
       &.show {
         visibility: initial;
         opacity: 1;
-        transform: translateX(-50%) scale(1);
+        transform: translateX(-50%) rotate(-90deg);
       }
     }
     .btn-pause {
