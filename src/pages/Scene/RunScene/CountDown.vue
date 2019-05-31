@@ -60,24 +60,14 @@
     align-items: center;
     justify-content: center;
     z-index: 1;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
     width: 100%;
     .tip {
       padding: 20px;
       font-size: 20px;
     }
-    .operate-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+    .btn-stop {
       transition: all 0.3s;
-      border-radius: 50%;
-      background: rgba($color: #fff, $alpha: 0.5);
-      width: 18vw;
-      height: 18vw;
-      font-size: 12vw;
-    }
-    .stop-btn {
       visibility: hidden;
       opacity: 0;
       transform: translateX(-50%) scale(0.2);
@@ -87,7 +77,8 @@
         transform: translateX(-50%) scale(1);
       }
     }
-    .pause-btn {
+    .btn-pause {
+      transition: all 0.3s;
       transform: translateX(-50%);
       &.pause {
         transform: translateX(50%) rotate(120deg);
@@ -112,10 +103,10 @@
     <div class="bottom-box">
       <div class="tip">{{currentCount}}/{{params.COUNT}}</div>
       <div>
-        <div @click.stop="cancle" :class="{show:pauseTime}" class="operate-btn stop-btn">
+        <div @click.stop="cancle" :class="{show:pauseTime}" class="circle-button btn-stop">
           <i class="iconfont icon-stop"></i>
         </div>
-        <div @click.stop="togglePause" :class="{pause:pauseTime}" class="operate-btn pause-btn">
+        <div @click.stop="togglePause" :class="{pause:pauseTime}" class="circle-button btn-pause">
           <i class="iconfont" :class="{'icon-pause':!pauseTime,'icon-play':pauseTime}"></i>
         </div>
       </div>

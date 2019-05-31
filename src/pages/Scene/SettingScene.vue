@@ -25,16 +25,17 @@
       transform: translateY(-50%);
     }
   }
-  .confirm-btn {
-    margin: 0 auto;
-    width: 20%;
-    border-radius: 30px;
-    background: #fff;
-    padding: 15px 40px;
-    font-size: 20px;
-    text-align: center;
-    color: #333;
-    margin: 10px auto;
+
+  .bottom-box {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    padding-bottom: 30px;
+    width: 100%;
   }
 }
 </style>
@@ -50,7 +51,12 @@
         <div :style="{background:color}"></div>
       </div>
     </div>
-    <div @click="backToHome" class="confirm-btn">返回</div>
+
+    <div class="bottom-box">
+      <div @click="backToHome" class="circle-button">
+        <i class="iconfont icon-tick"></i>
+      </div>
+    </div>
   </div>
 </template>
 

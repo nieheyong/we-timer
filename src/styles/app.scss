@@ -19,6 +19,25 @@ page {
   height: 100%;
 }
 
-.invalid-color {
-  color: rgba($color: #fff, $alpha: 0.2) !important;
+.circle-button {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: rgba($color: #fff, $alpha: 0.5);
+  width: 20vw;
+  height: 20vw;
+  color: #fff;
+  .iconfont {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12vw;
+    font-weight: lighter;
+  }
+  &.disable {
+    background: rgba($color: #fff, $alpha: 0.1);
+    color: rgba($color: #fff, $alpha: 0.2);
+  }
 }

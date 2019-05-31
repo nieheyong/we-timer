@@ -64,6 +64,9 @@
       }
       .number {
         font-size: 10vh;
+        &.invalid {
+          color: rgba($color: #fff, $alpha: 0.2);
+        }
         @media (min-height: 600px) {
           & {
             font-size: 12vh;
@@ -84,23 +87,6 @@
       margin-bottom: 20px;
       color: #ddd;
     }
-    .start-btn {
-      margin: 0 auto;
-      // margin-top: 20px;
-      display: inline-block;
-      width: 20vw;
-      height: 20vw;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba($color: #d4c5c5, $alpha: 0.5);
-      color: #eee;
-      .iconfont {
-        font-size: 80rpx;
-        font-weight: lighter;
-      }
-    }
   }
 }
 </style>
@@ -113,7 +99,7 @@
       @click="showSetting"
       v-if="showSettingBtn"
     >
-      <i class="iconfont icon-setting"></i>
+      <i class="iconfont icon-cog"></i>
     </div>
     <div class="piece-box">
       <picker @change="countChange" :value="countIndex" :range="countRange">
@@ -142,7 +128,7 @@
       >
         <div class="piece" hover-class="hover" :hover-start-time="0">
           <div class="title">休息</div>
-          <div class="number" :class="{'invalid-color':restTimeInvalid}">{{restTimeStr}}</div>
+          <div class="number" :class="{'invalid':restTimeInvalid}">{{restTimeStr}}</div>
         </div>
       </picker>
     </div>
@@ -151,8 +137,8 @@
       <div class="tip">共 03:50 分钟</div>
       <div
         @click="startCountDown"
-        :class="{'invalid-color':restTimeInvalid||workTimeInvalid}"
-        class="start-btn"
+        :class="{'disable':restTimeInvalid||workTimeInvalid}"
+        class="circle-button"
       >
         <i class="iconfont icon-go-right"></i>
       </div>

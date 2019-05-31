@@ -9,6 +9,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.icon-alarm:before {
+  content: '\e612';
+}
+
+.icon-cog:before {
+  content: '\e649';
+}
+
 .icon-pause:before {
   content: '\e67e';
 }
@@ -19,6 +28,10 @@
 
 .icon-stop:before {
   content: '\e6a3';
+}
+
+.icon-tick:before {
+  content: '\e6a9';
 }
 
 .icon-setting:before {
@@ -39,22 +52,6 @@
 
 .icon-refresh:before {
   content: '\e650';
-}
-
-.icon-check:before {
-  content: '\e651';
-}
-
-.icon-close:before {
-  content: '\e652';
-}
-
-.icon-info:before {
-  content: '\e654';
-}
-
-.icon-help:before {
-  content: '\e655';
 }
 
 .icon-like:before {
