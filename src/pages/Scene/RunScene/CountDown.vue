@@ -71,6 +71,7 @@
     .tip {
       padding: 20px;
       font-size: 20px;
+      font-weight: 100;
     }
     .btn-stop {
       transition: all 0.3s;
@@ -101,9 +102,10 @@
       :style="{background:`linear-gradient(to bottom, rgba(0, 0, 0, 0) ${percent}%, rgba(255, 255, 255, 0.1) ${percent}%)`}"
     ></div>
     <div class="top-status-text">
-      <div v-if="status===STATUS.prepare">预备</div>
-      <div v-if="status===STATUS.work">运动</div>
-      <div v-if="status===STATUS.rest">休息一下</div>
+      <span v-if="status===STATUS.prepare">预备</span>
+      <span v-if="status===STATUS.work">运动</span>
+      <span v-if="status===STATUS.rest">休息</span>
+      <span v-if="status!==STATUS.prepare">{{currentCount}}/{{params.count}}</span>
     </div>
 
     <div :class="[`${status}-active`]" class="time-ct">
@@ -112,8 +114,8 @@
       <div class="prepare-time">{{remain.prepareSec | padStart(2,'0')}}</div>
     </div>
 
-    <div class="bottom-box">
-      <div class="tip">{{currentCount}}/{{params.count}}</div>
+    <div class="bottom-box" :class="{'pd-bt-40':isIphoneX}">
+      <div class="tip" v-if="status!==STATUS.prepare">{{totalRemainSec | secToTimeStr}}</div>
       <div>
         <div
           @click.stop="cancle"
@@ -161,6 +163,7 @@ export default {
         workSec: 30,
         restSec: 10
       },
+      totalRemainSec: 0,
       finish: false,
       percent: 0,
       currentCount: 1,
@@ -176,6 +179,9 @@ export default {
         workTimeSec,
         restTimeSec
       }
+    },
+    isIphoneX() {
+      return this.$store.state.sysInfo.isIphoneX
     }
   },
   mounted() {
@@ -225,6 +231,11 @@ export default {
         remain.prepareSec = remainPrepareSec
         this.status = STATUS.prepare
       } else {
+        this.totalRemainSec =
+          count * (workTimeSec + restTimeSec) -
+          restTimeSec -
+          expireSec +
+          PREP_SEC
         remain.prepareSec = 0
         const startSec = expireSec - PREP_SEC
         const ONE_COUNT_SEC = workTimeSec + restTimeSec

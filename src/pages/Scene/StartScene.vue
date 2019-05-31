@@ -135,7 +135,7 @@
       </picker>
     </div>
 
-    <div class="bottom-box">
+    <div class="bottom-box" :class="{'pd-bt-40':isIphoneX}">
       <div class="tip">
         共
         <span v-if="restTimeSec&&workTimeSec">{{totalSec | secToTimeStr}}</span>
@@ -198,6 +198,9 @@ export default {
       return (
         this.count * (this.workTimeSec + this.restTimeSec) - this.restTimeSec
       )
+    },
+    isIphoneX() {
+      return this.$store.state.sysInfo.isIphoneX
     }
   },
   methods: {

@@ -47,3 +47,19 @@ export const playAudio = fileName => {
   audio.play()
   audio.onEnded(audio.destroy)
 }
+
+export const sysInfo = (() => {
+  const systemInfo = uni.getSystemInfoSync()
+
+  let model = systemInfo.model || ''
+  model = model.toLowerCase()
+  const isIphoneX = model.includes('iphone') && model.includes('x')
+
+  let system = systemInfo.system || ''
+  const isIos = system.toLowerCase().includes('ios')
+
+  return {
+    isIphoneX,
+    isIos
+  }
+})()

@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <div class="bottom-box">
+    <div class="bottom-box" :class="{'pd-bt-40':isIphoneX}">
       <div
         @click="backToHome"
         hover-class="hover"
@@ -74,6 +74,11 @@ export default {
   data() {
     return {
       themeColors
+    }
+  },
+  computed: {
+    isIphoneX() {
+      return this.$store.state.sysInfo.isIphoneX
     }
   },
   methods: {
