@@ -35,16 +35,6 @@ export const secToTimeStr = sec => {
   return toTimeStr(min, sec % 60)
 }
 
-export const timeStrToSec = timeStr => {
-  const [min, sec] = toMinSec(timeStr)
-  return min * 60 + sec
-}
-
-export const toMinSec = timeStr => {
-  const [min, sec] = timeStr.split(':')
-  return [Number.parseInt(min), Number.parseInt(sec)]
-}
-
 export const isSceneInScreen = (scene, fromScene, activeScene, isSliding) => {
   const isActive = activeScene.name === scene.name
   const isLeaveing = fromScene.name === scene.name && isSliding

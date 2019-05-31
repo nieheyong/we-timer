@@ -4,6 +4,7 @@ import App from './App'
 import store from './store'
 import './styles/app.scss'
 import './styles/iconfont.css'
+import './common/extend-vue'
 
 Vue.config.productionTip = false
 

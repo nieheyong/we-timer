@@ -95,9 +95,9 @@
       :style="{background:`linear-gradient(to bottom, rgba(0, 0, 0, 0) ${percent}%, rgba(255, 255, 255, 0.1) ${percent}%)`}"
     ></div>
     <div :class="[`${status}-active`]" class="time-ct">
-      <div class="prepare-time">{{prepareTimeStr}}</div>
-      <div class="work-time">{{workTimeStr}}</div>
-      <div class="rest-time">{{restTimeStr}}</div>
+      <div class="prepare-time">{{remain.prepareSec | padStart(2,'0')}}</div>
+      <div class="work-time">{{remain.workSec | secToTimeStr}}</div>
+      <div class="rest-time">{{remain.restSec | secToTimeStr}}</div>
     </div>
 
     <div class="bottom-box">
@@ -130,7 +130,7 @@
 
 <script>
 import { SCENE } from '@/common/enums'
-import { secToTimeStr, delay, playAudio } from '@/common/utils'
+import { delay, playAudio } from '@/common/utils'
 
 const STATUS = {
   prepare: 'prepare',
@@ -157,15 +157,6 @@ export default {
   computed: {
     params() {
       return this.$store.state.countDownParams
-    },
-    prepareTimeStr() {
-      return this.remain.prepareSec.toString().padStart(2, 0)
-    },
-    workTimeStr() {
-      return secToTimeStr(this.remain.workSec)
-    },
-    restTimeStr() {
-      return secToTimeStr(this.remain.restSec)
     }
   },
   mounted() {

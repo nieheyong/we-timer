@@ -106,7 +106,7 @@
       <picker @change="countChange" :value="countIndex" :range="countRange">
         <div class="piece" hover-class="hover" :hover-start-time="0">
           <div class="title">次数</div>
-          <div class="number">{{countStr}}</div>
+          <div class="number">{{count | padStart(2,'0')}}</div>
         </div>
       </picker>
       <picker
@@ -117,7 +117,10 @@
       >
         <div class="piece" hover-class="hover" :hover-start-time="0">
           <div class="title">运动</div>
-          <div class="number" :class="{'invalid-color':workTimeInvalid}">{{workTimeStr}}</div>
+          <div
+            class="number"
+            :class="{'invalid-color':workTimeInvalid}"
+          >{{workTimeSec | secToTimeStr}}</div>
         </div>
       </picker>
 
@@ -129,7 +132,7 @@
       >
         <div class="piece" hover-class="hover" :hover-start-time="0">
           <div class="title">休息</div>
-          <div class="number" :class="{'invalid':restTimeInvalid}">{{restTimeStr}}</div>
+          <div class="number" :class="{'invalid':restTimeInvalid}">{{restTimeSec | secToTimeStr}}</div>
         </div>
       </picker>
     </div>
@@ -153,7 +156,7 @@
 <script>
 import { SCENE } from '@/common/enums'
 import { mapState, mapGetters } from 'vuex'
-import { toTimeStr, toMinSec, timeStrToSec } from '@/common/utils'
+
 export default {
   data() {
     const genList = count =>
@@ -161,36 +164,36 @@ export default {
     const timeRange = genList(60)
     const countRange = genList(100).slice(1)
 
-    let countStr = '08'
-    let workTimeStr = '00:20'
-    let restTimeStr = '00:10'
+    let count = 8
+    let workTimeSec = 20
+    let restTimeSec = 10
     const timeInfo = wx.getStorageSync('TimeInfo')
     if (timeInfo) {
-      ;[countStr, workTimeStr, restTimeStr] = timeInfo
+      ;[count, workTimeSec, restTimeSec] = timeInfo
     } else {
-      wx.setStorageSync('TimeInfo', [countStr, workTimeStr, restTimeStr])
+      wx.setStorageSync('TimeInfo', [count, workTimeSec, restTimeSec])
     }
 
     return {
       SCENE,
       timeRange: [timeRange, timeRange],
       countRange,
-      countStr,
-      countIndex: Number.parseInt(countStr) - 1,
-      workTimeStr,
-      workTimeIndex: toMinSec(workTimeStr),
-      restTimeStr,
-      restTimeIndex: toMinSec(restTimeStr)
+      count,
+      countIndex: count - 1,
+      workTimeSec,
+      workTimeIndex: [Math.floor(workTimeSec / 60), workTimeSec % 60],
+      restTimeSec,
+      restTimeIndex: [Math.floor(restTimeSec / 60), restTimeSec % 60]
     }
   },
   computed: {
     ...mapState(['activeScene', 'isSliding']),
     ...mapGetters(['titleBarBtnTop']),
     workTimeInvalid() {
-      return this.workTimeStr === '00:00'
+      return this.workTimeSec === 0
     },
     restTimeInvalid() {
-      return this.restTimeStr === '00:00'
+      return this.restTimeSec === 0
     },
     showSettingBtn() {
       return this.activeScene.name === SCENE.Start.name && !this.isSliding
@@ -204,9 +207,9 @@ export default {
       if (this.restTimeInvalid || this.workTimeInvalid) return
       this.$store.commit('setCountDownParams', {
         PREP_SEC: 3,
-        COUNT: Number.parseInt(this.countStr),
-        WORK_SEC: timeStrToSec(this.workTimeStr),
-        REST_SEC: timeStrToSec(this.restTimeStr)
+        COUNT: this.count,
+        WORK_SEC: this.workTimeSec,
+        REST_SEC: this.restTimeSec
       })
       this.slideTo(SCENE.Run)
     },
@@ -215,26 +218,26 @@ export default {
     },
     countChange(e) {
       this.countIndex = e.detail.value
-      this.countStr = this.countRange[this.countIndex]
+      this.count = this.countRange[this.countIndex]
       this.saveTimeInfo()
     },
     workTimeChange(e) {
       this.workTimeIndex = e.detail.value
       const [min, sec] = this.workTimeIndex
-      this.workTimeStr = toTimeStr(min, sec)
+      this.workTimeSec = min * 60 + sec
       this.saveTimeInfo()
     },
     restTimeChange(e) {
       this.restTimeIndex = e.detail.value
       const [min, sec] = this.restTimeIndex
-      this.restTimeStr = toTimeStr(min, sec)
+      this.restTimeSec = min * 60 + sec
       this.saveTimeInfo()
     },
     saveTimeInfo() {
       wx.setStorageSync('TimeInfo', [
-        this.countStr,
-        this.workTimeStr,
-        this.restTimeStr
+        this.count,
+        this.workTimeSec,
+        this.restTimeSec
       ])
     }
   }
