@@ -216,7 +216,7 @@ export default {
     },
     countChange(e) {
       this.countIndex = e.detail.value
-      this.count = this.countRange[this.countIndex]
+      this.count = Number.parseInt(this.countIndex) + 1
       this.saveTimeInfo()
     },
     workTimeChange(e) {

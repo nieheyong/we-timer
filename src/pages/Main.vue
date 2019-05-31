@@ -59,6 +59,14 @@ export default {
         this.activeScene,
         this.isSliding
       )
+    },
+    showSettingView() {
+      return isSceneInScreen(
+        SCENE.Setting,
+        this.fromScene,
+        this.activeScene,
+        this.isSliding
+      )
     }
   },
   methods: {
