@@ -15,7 +15,7 @@
   <div class="page home-page" :style="{background:themeColor}">
     <SceneContainer :grid="[3,1]" :active="activeScene.position" @transitionend="transitionend">
       <SceneWrap :sceneInfo="SCENE.Setting">
-        <SettingScene/>
+        <SettingScene v-if="showSettingView"/>
       </SceneWrap>
       <SceneWrap :sceneInfo="SCENE.Start">
         <StartScene/>
