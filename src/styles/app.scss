@@ -23,10 +23,11 @@ page {
   display: inline-block;
   position: relative;
   margin: 0 auto;
+  // border: solid 4px rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   background: rgba($color: #fff, $alpha: 0.5);
-  width: 20vw;
-  height: 20vw;
+  width: 19vw;
+  height: 19vw;
   color: #fff;
   &.hover {
     background: rgba($color: #fff, $alpha: 0.3);

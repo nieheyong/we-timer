@@ -10,12 +10,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-alarm:before {
-  content: '\e612';
-}
-
 .icon-cog:before {
-  content: '\e649';
+  content: '\e602';
 }
 
 .icon-pause:before {
@@ -34,34 +30,10 @@
   content: '\e6a9';
 }
 
-.icon-setting:before {
-  content: '\e63f';
-}
-
-.icon-ring:before {
-  content: '\e642';
-}
-
-.icon-ring-off:before {
-  content: '\e643';
-}
-
-.icon-filter:before {
-  content: '\e648';
-}
-
 .icon-refresh:before {
   content: '\e650';
 }
 
-.icon-like:before {
-  content: '\e657';
-}
-
 .icon-like_filled:before {
   content: '\e658';
-}
-
-.icon-go-right:before {
-  content: '\e664';
 }

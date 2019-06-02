@@ -149,7 +149,7 @@
         :class="{'error':!restTimeSec||!workTimeSec}"
         class="circle-button"
       >
-        <i class="iconfont icon-go-right"></i>
+        <i class="iconfont icon-play"></i>
       </div>
     </div>
   </div>
