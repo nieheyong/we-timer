@@ -7,6 +7,46 @@
   overflow: hidden;
   .top-box {
     flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    .setting-box {
+      transition: all 0.3s;
+      font-size: 32rpx;
+      margin: 0 20px;
+      padding: 6px 0;
+      border-radius: 6px;
+      background: rgba($color: #fff, $alpha: 0.1);
+      .setting-line {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        &:last-of-type {
+          border-bottom: none;
+        }
+        .text {
+          flex: 1;
+        }
+        .iconfont {
+          transition: transform 0.3s;
+          transform: rotate(90deg);
+          color: #eee;
+        }
+        &.hover {
+          background: rgba($color: #fff, $alpha: 0.05);
+        }
+        &.unfold {
+          .iconfont {
+            transform: rotate(-90deg);
+          }
+        }
+      }
+      .divider {
+        // width: 100%;
+        height: 1px;
+        margin: 0 20px;
+        background: rgba($color: #fff, $alpha: 0.08);
+      }
+    }
   }
   .color-piece-container {
     overflow-y: auto;
@@ -14,10 +54,11 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 10px;
-    padding: 10px 10px;
+    padding: 10px 20px;
+    // margin: 0 -20px;
     .color-piece {
       box-sizing: border-box;
-      border: solid 1px rgba($color: #fff, $alpha: 0.8);
+      border: solid 1px rgba($color: #fff, $alpha: 1);
       padding-top: 100%;
       width: 100%;
       border-radius: 6px;
@@ -42,15 +83,33 @@
 <template>
   <div class="setting-view">
     <div class="top-box" :style="{'padding-top':`${titleBarBtnTop+40}px`}">
-      <div class="color-piece-container">
-        <div
-          @click="setThemeColor(color)"
-          v-for="color in themeColors"
-          :key="color"
-          :style="{background:color}"
-          class="color-piece"
-        />
-      </div>
+      <ul class="setting-box">
+        <li class="setting-line">
+          <div class="text">更新记录</div>
+          <i class="iconfont icon-arrow_right"></i>
+        </li>
+        <div class="divider"/>
+        <li
+          @click="showThemes=!showThemes"
+          :class="{unfold:showThemes}"
+          hover-class="hover"
+          :hover-start-time="0"
+          :hover-delay-time="100"
+          class="setting-line"
+        >
+          <div class="text">主题设置</div>
+          <i class="iconfont icon-arrow_right"></i>
+        </li>
+        <div v-if="showThemes" class="color-piece-container">
+          <div
+            @click="setThemeColor(color)"
+            v-for="color in themeColors"
+            :key="color"
+            :style="{background:color}"
+            class="color-piece"
+          />
+        </div>
+      </ul>
     </div>
 
     <div class="bottom-box" :class="{'pd-bt-40':isIphoneX}">
@@ -75,7 +134,8 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      themeColors
+      themeColors,
+      showThemes: false
     }
   },
   computed: {

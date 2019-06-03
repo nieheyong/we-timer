@@ -14,6 +14,30 @@
   content: '\e602';
 }
 
+.icon-mute:before {
+  content: '\e752';
+}
+
+.icon-un-mute:before {
+  content: '\e753';
+}
+
+.icon-arrow_left:before {
+  content: '\e615';
+}
+
+.icon-arrow_down:before {
+  content: '\e616';
+}
+
+.icon-arrow_up:before {
+  content: '\e617';
+}
+
+.icon-arrow_right:before {
+  content: '\e618';
+}
+
 .icon-pause:before {
   content: '\e67e';
 }

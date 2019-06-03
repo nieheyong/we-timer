@@ -23,6 +23,11 @@
     border: solid 1px rgba($color: #fff, $alpha: 0.1);
     background: rgba($color: #000000, $alpha: 0.1);
     color: #fff;
+    transition: all 0.8s;
+    &.hide {
+      opacity: 0;
+      transform: scale(0.6) rotate(-80deg);
+    }
     .iconfont {
       position: absolute;
       left: 50%;
@@ -99,7 +104,7 @@
       class="setting-btn"
       :style="{top:`${titleBarBtnTop}px`}"
       @click="showSetting"
-      v-if="showSettingBtn"
+      :class="{hide:!showSettingBtn}"
     >
       <i class="iconfont icon-cog"></i>
     </div>

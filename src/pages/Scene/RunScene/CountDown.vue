@@ -132,7 +132,6 @@
           :class="{pause:pauseTime}"
           hover-class="hover"
           :hover-start-time="0"
-          :hover-delay-time="100"
           class="circle-button btn-pause"
         >
           <i class="iconfont" :class="{'icon-pause':!pauseTime,'icon-play':pauseTime}"></i>
