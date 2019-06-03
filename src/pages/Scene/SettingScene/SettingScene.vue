@@ -84,11 +84,6 @@
   <div class="setting-view">
     <div class="top-box" :style="{'padding-top':`${titleBarBtnTop+40}px`}">
       <ul class="setting-box">
-        <li class="setting-line">
-          <div class="text">更新记录</div>
-          <i class="iconfont icon-arrow_right"></i>
-        </li>
-        <div class="divider"/>
         <li
           @click="showThemes=!showThemes"
           :class="{unfold:showThemes}"
@@ -109,6 +104,12 @@
             class="color-piece"
           />
         </div>
+        <div class="divider"/>
+        <li @click="showChangeLog=!showChangeLog" class="setting-line">
+          <div class="text">更新记录</div>
+          <i class="iconfont icon-arrow_right"></i>
+        </li>
+        <ChangeLog v-if="showChangeLog"/>
       </ul>
     </div>
 
@@ -130,12 +131,16 @@
 import { SCENE } from '@/common/enums'
 import { themeColors } from '@/common/config'
 import { mapState, mapGetters } from 'vuex'
-
+import ChangeLog from './ChangeLog.vue'
 export default {
+  components: {
+    ChangeLog
+  },
   data() {
     return {
       themeColors,
-      showThemes: false
+      showThemes: false,
+      showChangeLog: false
     }
   },
   computed: {
