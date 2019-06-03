@@ -5,32 +5,24 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  .color-piece-container {
+  .top-box {
     flex: 1;
+  }
+  .color-piece-container {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 15px;
-    padding: 15px 15px;
+    grid-gap: 10px;
+    padding: 10px 10px;
     .color-piece {
       box-sizing: border-box;
       border: solid 1px rgba($color: #fff, $alpha: 0.8);
       padding-top: 100%;
       width: 100%;
-      // margin: 4px;
       border-radius: 6px;
       display: inline-block;
       overflow: hidden;
-      position: relative;
-      & > div {
-        min-height: 300%;
-        width: 100%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
     }
   }
   .bottom-box {
@@ -49,14 +41,15 @@
 </style>
 <template>
   <div class="setting-view">
-    <div class="color-piece-container" :style="{'padding-top':`${titleBarBtnTop+40}px`}">
-      <div
-        v-for="color in themeColors"
-        @click="setThemeColor(color)"
-        class="color-piece"
-        :key="color"
-      >
-        <div :style="{background:color}"></div>
+    <div class="top-box" :style="{'padding-top':`${titleBarBtnTop+40}px`}">
+      <div class="color-piece-container">
+        <div
+          @click="setThemeColor(color)"
+          v-for="color in themeColors"
+          :key="color"
+          :style="{background:color}"
+          class="color-piece"
+        />
       </div>
     </div>
 
