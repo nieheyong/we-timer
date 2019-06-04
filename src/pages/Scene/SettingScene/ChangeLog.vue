@@ -24,7 +24,7 @@
     <li class="version-change-log">
       <div class="date">2019-06-05</div>
       <ul>
-        <li class="log">1.更新了设置界面⚙</li>
+        <li class="log">1.全新的设置界面⚙</li>
         <li class="log">2.加入了更新记录📝</li>
         <li class="log">3.一系列体验优化🚀</li>
       </ul>
