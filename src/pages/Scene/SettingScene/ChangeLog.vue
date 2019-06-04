@@ -22,18 +22,18 @@
 <template>
   <ul class="change-log-view">
     <li class="version-change-log">
-      <div class="date">2019-06-04</div>
+      <div class="date">2019-06-05</div>
       <ul>
-        <li class="log">1.更新了设置界面</li>
-        <li class="log">2.优化进入设置界面的动画性能</li>
-        <li class="log">3.加入了更新记录</li>
+        <li class="log">1.更新了设置界面⚙</li>
+        <li class="log">2.加入了更新记录📝</li>
+        <li class="log">3.一系列体验优化🚀</li>
       </ul>
     </li>
     <li class="version-change-log">
       <div class="date">2019-06-01</div>
       <ul>
-        <li class="log">1.儿童节快乐</li>
-        <li class="log">2.小程序发布</li>
+        <li class="log">1.小程序发布🎉</li>
+        <li class="log">2.儿童节快乐🎈</li>
       </ul>
     </li>
   </ul>
