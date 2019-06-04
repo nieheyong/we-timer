@@ -88,8 +88,6 @@
           @click="showThemes=!showThemes"
           :class="{unfold:showThemes}"
           hover-class="hover"
-          :hover-start-time="0"
-          :hover-delay-time="100"
           class="setting-line"
         >
           <div class="text">主题设置</div>
@@ -105,7 +103,12 @@
           />
         </div>
         <div class="divider"/>
-        <li @click="showChangeLog=!showChangeLog" class="setting-line">
+        <li
+          @click="showChangeLog=!showChangeLog"
+          :class="{unfold:showChangeLog}"
+          hover-class="hover"
+          class="setting-line"
+        >
           <div class="text">更新记录</div>
           <i class="iconfont icon-arrow_right"></i>
         </li>

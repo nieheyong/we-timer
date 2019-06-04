@@ -7,7 +7,6 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
-
   .progress-bar {
     position: absolute;
     left: 0;
@@ -21,9 +20,12 @@
     text-align: center;
     font-size: 30px;
     font-weight: normal;
+    font-family: BebasNeue-Regular;
   }
   .time-ct {
     transition: all 0.5s;
+    font-family: BebasNeue-Regular;
+    font-weight: lighter;
     .work-time,
     .rest-time,
     .prepare-time {

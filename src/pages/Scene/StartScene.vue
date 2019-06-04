@@ -70,6 +70,8 @@
       }
       .number {
         font-size: 10vh;
+        font-family: BebasNeue-Regular;
+        font-weight: lighter;
         &.invalid {
           color: rgba($color: #fff, $alpha: 0.2);
         }
