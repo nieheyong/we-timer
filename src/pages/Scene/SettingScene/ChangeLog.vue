@@ -26,7 +26,7 @@
       <ul>
         <li class="log">1.更新了设置界面</li>
         <li class="log">2.优化进入设置界面的动画性能</li>
-        <li class="log">3.加入了更新历史</li>
+        <li class="log">3.加入了更新记录</li>
       </ul>
     </li>
     <li class="version-change-log">
