@@ -9,6 +9,23 @@
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+      img {
+        display: inline-block;
+        width: 70px;
+        height: 70px;
+        box-shadow: 0 0 4px rgba($color: #000, $alpha: 0.2);
+        border-radius: 50%;
+      }
+      .app-name {
+        font-size: 20px;
+        margin-top: 5px;
+        font-weight: bolder;
+        color: #ddd;
+      }
+    }
     .setting-box {
       transition: all 0.3s;
       font-size: 32rpx;
@@ -82,7 +99,11 @@
 </style>
 <template>
   <div class="setting-view">
-    <div class="top-box" :style="{'padding-top':`${titleBarBtnTop+40}px`}">
+    <div class="top-box" :style="{'padding-top':`${titleBarBtnTop+30}px`}">
+      <div class="logo-container">
+        <img src="../../../static/logo.png" alt>
+        <div class="app-name">间隔计时</div>
+      </div>
       <ul class="setting-box">
         <li
           @click="showThemes=!showThemes"

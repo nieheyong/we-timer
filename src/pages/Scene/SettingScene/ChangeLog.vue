@@ -5,8 +5,9 @@
   font-family: unset;
   .version-change-log {
     width: 100%;
-    .data {
-      margin: 10px 0;
+    margin-bottom: 30px;
+    .date {
+      margin-bottom: 10px;
       text-align: center;
       // font-weight: bolder;
       font-size: 36rpx;
@@ -21,7 +22,7 @@
 <template>
   <ul class="change-log-view">
     <li class="version-change-log">
-      <div class="data">2019 06.04</div>
+      <div class="date">2019-06-04</div>
       <ul>
         <li class="log">1.更新了设置界面</li>
         <li class="log">2.优化进入设置界面的动画性能</li>
@@ -29,7 +30,7 @@
       </ul>
     </li>
     <li class="version-change-log">
-      <div class="data">2019 06.01</div>
+      <div class="date">2019-06-01</div>
       <ul>
         <li class="log">1.儿童节快乐</li>
         <li class="log">2.小程序发布</li>

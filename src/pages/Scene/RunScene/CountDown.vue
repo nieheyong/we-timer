@@ -19,8 +19,8 @@
     color: rgba($color: #fff, $alpha: 0.7);
     text-align: center;
     font-size: 30px;
-    font-weight: normal;
     font-family: BebasNeue-Regular;
+    font-weight: lighter;
   }
   .time-ct {
     transition: all 0.5s;
@@ -73,6 +73,7 @@
     .tip {
       padding: 20px;
       font-size: 20px;
+      font-family: BebasNeue-Regular;
       font-weight: 100;
     }
     .btn-stop {
