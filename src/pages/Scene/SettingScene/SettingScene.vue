@@ -101,7 +101,7 @@
   <div class="setting-view">
     <div class="top-box" :style="{'padding-top':`${titleBarBtnTop+30}px`}">
       <div class="logo-container">
-        <img src="../../../static/logo.png" alt>
+        <img src="/static/logo.png" alt>
         <div class="app-name">间隔计时</div>
       </div>
       <ul class="setting-box">
