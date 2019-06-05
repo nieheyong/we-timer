@@ -95,10 +95,20 @@
   .bottom-box {
     padding-bottom: 20px;
     margin-top: 10px;
-    .tip {
+    .tip-ct {
+      height: 22px;
       margin-bottom: 20px;
       color: #ddd;
       font-size: 16px;
+      .tip {
+        transform: translateY(20px) scale(0.5);
+        opacity: 0;
+        &.show {
+          transition: all 0.5s;
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+      }
     }
   }
 }
@@ -147,10 +157,11 @@
     </div>
 
     <div class="bottom-box" :class="{'pd-bt-40':isIphoneX}">
-      <div class="tip">
-        共
-        <span v-if="restTimeSec&&workTimeSec">{{totalSec | secToTimeStr}}</span>
-        <span v-else>xx:xx</span>
+      <div class="tip-ct">
+        <div class="tip" :class="{show:restTimeSec&&workTimeSec}">
+          共
+          <span v-if="restTimeSec&&workTimeSec">{{totalSec | secToTimeStr}}</span>
+        </div>
       </div>
       <div
         @click="startCountDown"
