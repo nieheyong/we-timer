@@ -46,11 +46,15 @@
       margin: 10px 20px;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
     .piece {
-      flex: 1;
-      padding: 10px 60px;
-      border-radius: 16px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 2vh;
       background: rgba($color: #d4c5c5, $alpha: 0.15);
       color: #fff;
       font-weight: bolder;
