@@ -5,24 +5,31 @@ import { sysInfo } from './common/utils'
 import * as config from './common/config'
 Vue.use(Vuex)
 
-let themeColor = uni.getStorageSync('ThemeColor')
+let themeColor = wx.getStorageSync('ThemeColor')
 if (!themeColor) {
   themeColor = config.defaultTheme
-  uni.setStorage({ key: 'ThemeColor', data: themeColor })
+  wx.setStorage({ key: 'ThemeColor', data: themeColor })
+}
+
+let isMuted = wx.getStorageSync('isMuted')
+if (isMuted === '') {
+  isMuted = false
+  wx.setStorage({ key: 'isMuted', data: isMuted })
 }
 
 const store = new Vuex.Store({
   state: {
-    themeColor: themeColor,
+    themeColor,
     fromScene: config.startScene,
     activeScene: config.startScene,
     isSliding: false,
+    isMuted,
     sysInfo: sysInfo
   },
   getters: {
     titleBarBtnTop(state) {
       if (sysInfo.isIphoneX) {
-        return 50
+        return 48
       }
       if (sysInfo.isIos) {
         return 26
@@ -34,15 +41,22 @@ const store = new Vuex.Store({
   mutations: {
     setThemeColor(state, payload) {
       state.themeColor = payload
-      uni.setStorage({ key: 'ThemeColor', data: payload })
+      wx.vibrateShort()
+      wx.setStorage({ key: 'ThemeColor', data: payload })
     },
     slideToScene(state, scene) {
+      wx.vibrateShort()
       state.fromScene = state.activeScene
       state.activeScene = scene
       state.isSliding = true
     },
     setIsSliding(state, payload) {
       state.isSliding = payload
+    },
+    toggleMuted(state) {
+      state.isMuted = !state.isMuted
+      wx.vibrateShort()
+      wx.setStorage({ key: 'isMuted', data: state.isMuted })
     }
   }
 })

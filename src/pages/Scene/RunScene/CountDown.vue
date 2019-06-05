@@ -175,7 +175,7 @@ export default {
 
   computed: {
     params() {
-      const [count, workTimeSec, restTimeSec] = uni.getStorageSync('TimeInfo')
+      const [count, workTimeSec, restTimeSec] = wx.getStorageSync('TimeInfo')
       return {
         count,
         workTimeSec,
@@ -198,6 +198,7 @@ export default {
   },
   methods: {
     togglePause() {
+      wx.vibrateShort()
       if (!this.pauseTime) {
         this.keepScreenOn(false)
         this.pauseTime = Date.now()
@@ -258,7 +259,7 @@ export default {
             remain.workSec = 0
             this.percent = 0
             this.finish = true
-            playAudio('success.mp3')
+            this.playAudio('success.mp3')
             this.$emit('finish')
             return
           }
@@ -286,13 +287,18 @@ export default {
       }
       if (!this.warnMap[key]) {
         this.warnMap[key] = true
-        playAudio(fileName)
+        this.playAudio(fileName)
       }
     },
     keepScreenOn(sta = true) {
       uni.setKeepScreenOn({
         keepScreenOn: sta
       })
+    },
+    playAudio(fileName) {
+      if (!this.$store.state.isMuted) {
+        playAudio(fileName)
+      }
     }
   }
 }

@@ -14,27 +14,10 @@
     background: #f00;
   }
   .setting-btn {
-    position: absolute;
-    left: 7pt;
-    bottom: 24pt;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: solid 1px rgba($color: #fff, $alpha: 0.1);
-    background: rgba($color: #000000, $alpha: 0.1);
-    color: #fff;
     transition: all 0.8s;
     &.hide {
       opacity: 0;
       transform: scale(0.6) rotate(-80deg);
-    }
-    .iconfont {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 18px;
-      font-weight: lighter;
     }
   }
   .piece-box {
@@ -115,9 +98,9 @@
 </style>
 <template>
   <div class="init-view" :style="{'padding-top':`${titleBarBtnTop+32}px`}">
-    <!-- <div class="statusbar" :style="{height:`${titleBarBtnTop}px`}"></div> -->
+    <!-- <div class="statusbar" :style="{height:`${titleBarBtnTop+32}px`}"></div> -->
     <div
-      class="setting-btn"
+      class="tile-button tile-button-left setting-btn"
       :style="{top:`${titleBarBtnTop}px`}"
       @click="showSetting"
       :class="{hide:!showSettingBtn}"
@@ -191,11 +174,11 @@ export default {
     let count = 8
     let workTimeSec = 20
     let restTimeSec = 10
-    const timeInfo = uni.getStorageSync('TimeInfo')
+    const timeInfo = wx.getStorageSync('TimeInfo')
     if (timeInfo) {
       ;[count, workTimeSec, restTimeSec] = timeInfo
     } else {
-      uni.setStorageSync('TimeInfo', [count, workTimeSec, restTimeSec])
+      wx.setStorageSync('TimeInfo', [count, workTimeSec, restTimeSec])
     }
 
     return {
@@ -254,7 +237,7 @@ export default {
       this.saveTimeInfo()
     },
     saveTimeInfo() {
-      uni.setStorageSync('TimeInfo', [
+      wx.setStorageSync('TimeInfo', [
         this.count,
         this.workTimeSec,
         this.restTimeSec
