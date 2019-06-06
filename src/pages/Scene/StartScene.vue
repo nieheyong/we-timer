@@ -97,11 +97,11 @@
 }
 </style>
 <template>
-  <div class="init-view" :style="{'padding-top':`${titleBarBtnTop+32}px`}">
-    <!-- <div class="statusbar" :style="{height:`${titleBarBtnTop+32}px`}"></div> -->
+  <div class="init-view" :style="{'padding-top':`${wxMenuPos.bottom+10}px`}">
+    <!-- <div class="statusbar" :style="{height:`${wxMenuPos.bottom}px`}"></div> -->
     <div
-      class="tile-button tile-button-left setting-btn"
-      :style="{top:`${titleBarBtnTop}px`}"
+      class="wx-menu-button setting-btn"
+      :style="{width:`${wxMenuPos.height}px`,height:`${wxMenuPos.height}px`,top:`${wxMenuPos.top}px`,left:`${wxMenuPos.marginSide}px`}"
       @click="showSetting"
       :class="{hide:!showSettingBtn}"
     >
@@ -195,7 +195,7 @@ export default {
   },
   computed: {
     ...mapState(['activeScene', 'isSliding']),
-    ...mapGetters(['titleBarBtnTop']),
+    ...mapGetters(['wxMenuPos']),
     showSettingBtn() {
       return this.activeScene.name === SCENE.Start.name && !this.isSliding
     },

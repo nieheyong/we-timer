@@ -17,6 +17,8 @@ if (isMuted === '') {
   wx.setStorage({ key: 'isMuted', data: isMuted })
 }
 
+const systemInfo = wx.getSystemInfoSync()
+
 const store = new Vuex.Store({
   state: {
     themeColor,
@@ -27,15 +29,10 @@ const store = new Vuex.Store({
     sysInfo: sysInfo
   },
   getters: {
-    titleBarBtnTop(state) {
-      if (sysInfo.isIphoneX) {
-        return 48
-      }
-      if (sysInfo.isIos) {
-        return 26
-      } else {
-        return 28
-      }
+    wxMenuPos() {
+      const res = wx.getMenuButtonBoundingClientRect()
+      res.marginSide = systemInfo.screenWidth - res.right
+      return res
     }
   },
   mutations: {

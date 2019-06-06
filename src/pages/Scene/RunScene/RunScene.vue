@@ -13,8 +13,8 @@
       <CountDown @finish="finish=true"/>
       <div
         @click="toggleMuted"
-        :style="{top:titleBarBtnTop+'px'}"
-        class="tile-button tile-button-center"
+        :style="{width:`${wxMenuPos.height}px`,height:`${wxMenuPos.height}px`,top:`${wxMenuPos.top}px`}"
+        class="wx-menu-button wx-menu-button-center"
       >
         <i class="iconfont" :class="{'icon-un-mute':!isMuted,'icon-mute':isMuted}"></i>
       </div>
@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     ...mapState(['isMuted']),
-    ...mapGetters(['titleBarBtnTop'])
+    ...mapGetters(['wxMenuPos'])
   },
   methods: {
     ...mapMutations(['toggleMuted'])
