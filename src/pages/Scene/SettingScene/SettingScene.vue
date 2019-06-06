@@ -97,6 +97,7 @@
   }
 }
 </style>
+
 <template>
   <div class="setting-view">
     <div class="top-box" :style="{'padding-top':`${wxMenuPos.bottom+10}px`}">

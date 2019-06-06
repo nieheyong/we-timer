@@ -22,6 +22,13 @@
 <template>
   <ul class="change-log-view">
     <li class="version-change-log">
+      <div class="date">2019-06-08</div>
+      <ul>
+        <li class="log">1.新增静音功能🔇</li>
+        <li class="log">2.新增摇一摇换主题🎀</li>
+      </ul>
+    </li>
+    <li class="version-change-log">
       <div class="date">2019-06-05</div>
       <ul>
         <li class="log">1.全新的设置界面⚙</li>

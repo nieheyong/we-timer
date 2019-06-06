@@ -1,18 +1,14 @@
 <style lang="scss" scoped>
-.home-page {
+.main-page {
   display: block;
   overflow: hidden;
-}
-.scene-wrap {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
-  position: absolute;
 }
 </style>
 
 <template>
-  <div class="page home-page" :style="{background:themeColor}">
+  <div class="page main-page" :style="{background:themeColor}">
     <SceneContainer :grid="[3,1]" :active="activeScene.position" @transitionend="transitionend">
       <SceneWrap :sceneInfo="SCENE.Setting">
         <SettingScene v-if="showSettingView"/>
