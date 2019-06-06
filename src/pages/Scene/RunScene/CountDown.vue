@@ -291,7 +291,7 @@ export default {
       }
     },
     keepScreenOn(sta = true) {
-      uni.setKeepScreenOn({
+      wx.setKeepScreenOn({
         keepScreenOn: sta
       })
     },

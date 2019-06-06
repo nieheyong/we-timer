@@ -97,8 +97,9 @@
 }
 </style>
 <template>
-  <div class="init-view" :style="{'padding-top':`${wxMenuPos.bottom+10}px`}">
-    <!-- <div class="statusbar" :style="{height:`${wxMenuPos.bottom}px`}"></div> -->
+  <div class="init-view" :style="{'padding-top':`${wxMenuPos.bottom}px`}">
+    <!-- <div class="statusbar" :style="{height:`${wxMenuPos.bottom}px`}"></div>
+    <div class="statusbar" :style="{height:`${wxMenuPos.top}px`}" style="background:#0f0"></div> -->
     <div
       class="wx-menu-button setting-btn"
       :style="{width:`${wxMenuPos.height}px`,height:`${wxMenuPos.height}px`,top:`${wxMenuPos.top}px`,left:`${wxMenuPos.marginSide}px`}"

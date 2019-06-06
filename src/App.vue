@@ -4,6 +4,7 @@ import { checkForUpdate } from './common/utils'
 export default {
   onLaunch: function() {
     console.log('App Launch')
+    wx.setInnerAudioOption({ obeyMuteSwitch: false })
   },
   onShow: function() {
     console.log('App Show')
