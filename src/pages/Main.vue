@@ -21,7 +21,7 @@
         <SettingScene v-if="showSettingView"/>
       </SceneWrap>
       <SceneWrap :sceneInfo="SCENE.Start">
-        <StartScene/>
+        <StartScene v-if="showStartView"/>
       </SceneWrap>
       <SceneWrap :sceneInfo="SCENE.Run">
         <RunScene v-if="showRunView"/>
@@ -77,6 +77,14 @@ export default {
     showWelcomeView() {
       return isSceneInScreen(
         SCENE.Welcome,
+        this.fromScene,
+        this.activeScene,
+        this.isSliding
+      )
+    },
+    showStartView() {
+      return isSceneInScreen(
+        SCENE.Start,
         this.fromScene,
         this.activeScene,
         this.isSliding

@@ -1,4 +1,4 @@
-export const SCENE_GRID = [3, 2]
+export const SCENE_GRID = [3, 3]
 
 export const SCENE = {
   Welcome: {
