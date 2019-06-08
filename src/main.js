@@ -29,7 +29,7 @@ wx.onAccelerometerChange(function(e) {
   if (Math.abs(e.x) > 1.7 || Math.abs(e.y) > 1.7) {
     if (Date.now() < lastChange + 300) return
     lastChange = Date.now()
-    store.commit('randomChangeTheme')
+    store.dispatch('randomChangeTheme')
   }
 })
 wx.startAccelerometer()

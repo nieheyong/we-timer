@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import { SCENE } from './common/enums'
 import { sysInfo } from './common/utils'
 import { getSetting, setSetting, APP_SETTING } from './common/app-setting'
-import { THEME_COLORS } from './common/utils'
+import { THEME_COLORS } from './common/enums'
 
 Vue.use(Vuex)
 
@@ -32,10 +32,6 @@ const store = new Vuex.Store({
       wx.vibrateShort()
       setSetting(APP_SETTING.CurrentTheme, payload)
     },
-    randomChangeTheme() {
-      const index = Math.floor(Math.random() * THEME_COLORS.length)
-      store.commit('setThemeColor', THEME_COLORS[index])
-    },
     slideToScene(state, scene) {
       wx.vibrateShort()
       state.fromScene = state.activeScene
@@ -49,6 +45,12 @@ const store = new Vuex.Store({
       state.isMuted = !state.isMuted
       wx.vibrateShort()
       setSetting(APP_SETTING.Muted, state.isMuted)
+    }
+  },
+  actions: {
+    randomChangeTheme(context) {
+      const index = Math.floor(Math.random() * THEME_COLORS.length)
+      context.commit('setThemeColor', THEME_COLORS[index])
     }
   }
 })

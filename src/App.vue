@@ -12,7 +12,7 @@ export default {
     checkForUpdate()
 
     if (getSetting(APP_SETTING.ChangeThemeOnAppShow)) {
-      store.commit('randomChangeTheme')
+      store.dispatch('randomChangeTheme')
     }
   },
   onHide: function() {
