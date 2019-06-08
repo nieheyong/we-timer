@@ -1,0 +1,81 @@
+<style lang="scss" >
+.theme-config {
+  .top-box {
+    padding: 0 20px;
+    .config-line {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: solid 1px rgba($color: #fff, $alpha: 0.1);
+      &:last-child {
+        border: none;
+      }
+      .text {
+        flex: 1;
+      }
+    }
+  }
+  .color-piece-container {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    padding: 10px 20px;
+    // margin: 0 -20px;
+    .color-piece {
+      box-sizing: border-box;
+      border: solid 1px rgba($color: #fff, $alpha: 1);
+      padding-top: 100%;
+      width: 100%;
+      border-radius: 6px;
+      display: inline-block;
+      overflow: hidden;
+    }
+  }
+}
+</style>
+
+<template>
+  <div class="theme-config">
+    <div class="top-box">
+      <label class="config-line">
+        <div class="text">启动时随机更换主题</div>
+        <switch color="#EA5B46" @change="configChange('random',$event)"/>
+      </label>
+      <label class="config-line">
+        <div class="text">摇一摇换主题</div>
+        <switch color="#EA5B46" @change="configChange('shake',$event)"/>
+      </label>
+    </div>
+    <div class="color-piece-container">
+      <div
+        @click="setThemeColor(color)"
+        v-for="color in themeColors"
+        :key="color"
+        :style="{background:color}"
+        class="color-piece"
+      />
+    </div>
+  </div>
+</template>
+
+<script>
+import { themeColors } from '@/common/config'
+
+export default {
+  data() {
+    return {
+      themeColors
+    }
+  },
+  methods: {
+    setThemeColor(color) {
+      this.$store.commit('setThemeColor', color)
+    },
+    configChange(name, e) {
+      console.log(name, e)
+    }
+  }
+}
+</script>

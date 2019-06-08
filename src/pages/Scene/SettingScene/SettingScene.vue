@@ -65,24 +65,6 @@
       }
     }
   }
-  .color-piece-container {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 10px;
-    padding: 10px 20px;
-    // margin: 0 -20px;
-    .color-piece {
-      box-sizing: border-box;
-      border: solid 1px rgba($color: #fff, $alpha: 1);
-      padding-top: 100%;
-      width: 100%;
-      border-radius: 6px;
-      display: inline-block;
-      overflow: hidden;
-    }
-  }
   .bottom-box {
     display: flex;
     // position: absolute;
@@ -115,15 +97,8 @@
           <div class="text">主题设置</div>
           <i class="iconfont icon-arrow_right"></i>
         </li>
-        <div v-if="showThemes" class="color-piece-container">
-          <div
-            @click="setThemeColor(color)"
-            v-for="color in themeColors"
-            :key="color"
-            :style="{background:color}"
-            class="color-piece"
-          />
-        </div>
+        <ThemeConfig v-if="showThemes"/>
+        
         <div class="divider"/>
         <li
           @click="showChangeLog=!showChangeLog"
@@ -154,16 +129,17 @@
 
 <script>
 import { SCENE } from '@/common/enums'
-import { themeColors } from '@/common/config'
 import { mapState, mapGetters } from 'vuex'
 import ChangeLog from './ChangeLog.vue'
+import ThemeConfig from './ThemeConfig.vue'
+
 export default {
   components: {
-    ChangeLog
+    ChangeLog,
+    ThemeConfig
   },
   data() {
     return {
-      themeColors,
       showThemes: false,
       showChangeLog: false
     }
@@ -177,9 +153,6 @@ export default {
   methods: {
     backToHome() {
       this.$store.commit('slideToScene', SCENE.Start)
-    },
-    setThemeColor(color) {
-      this.$store.commit('setThemeColor', color)
     }
   }
 }
