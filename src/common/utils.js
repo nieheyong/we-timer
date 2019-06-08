@@ -63,3 +63,17 @@ export const sysInfo = (() => {
     isIos
   }
 })()
+
+export const getStorageSync = key => {
+  let res = ''
+  try {
+    wx.getStorageSync(key)
+  } catch (e) {}
+  return res
+}
+
+export const setStorageSync = (key, data) => {
+  try {
+    wx.setStorageSync(key, data)
+  } catch (e) {}
+}

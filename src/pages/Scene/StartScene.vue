@@ -165,6 +165,7 @@
 <script>
 import { SCENE } from '@/common/enums'
 import { mapState, mapGetters } from 'vuex'
+import { getSetting, setSetting, APP_SETTING } from '../../common/app-setting'
 
 export default {
   data() {
@@ -173,15 +174,9 @@ export default {
     const timeRange = genList(60)
     const countRange = genList(100).slice(1)
 
-    let count = 8
-    let workTimeSec = 20
-    let restTimeSec = 10
-    const timeInfo = wx.getStorageSync('TimeInfo')
-    if (timeInfo) {
-      ;[count, workTimeSec, restTimeSec] = timeInfo
-    } else {
-      wx.setStorageSync('TimeInfo', [count, workTimeSec, restTimeSec])
-    }
+    const [count, workTimeSec, restTimeSec] = getSetting(
+      APP_SETTING.CountParams
+    )
 
     return {
       SCENE,
@@ -239,7 +234,7 @@ export default {
       this.saveTimeInfo()
     },
     saveTimeInfo() {
-      wx.setStorageSync('TimeInfo', [
+      setSetting(APP_SETTING.CountParams, [
         this.count,
         this.workTimeSec,
         this.restTimeSec

@@ -3,33 +3,23 @@ import Vuex from 'vuex'
 import { SCENE } from './common/enums'
 import { sysInfo } from './common/utils'
 import * as config from './common/config'
+import { getSetting, setSetting, APP_SETTING } from './common/app-setting'
+import { themeColors } from './common/config'
+
 Vue.use(Vuex)
-
-let themeColor = wx.getStorageSync('ThemeColor')
-if (!themeColor) {
-  themeColor = config.defaultTheme
-  wx.setStorage({ key: 'ThemeColor', data: themeColor })
-}
-
-let isMuted = wx.getStorageSync('isMuted')
-if (isMuted === '') {
-  isMuted = false
-  wx.setStorage({ key: 'isMuted', data: isMuted })
-}
-
-const systemInfo = wx.getSystemInfoSync()
 
 const store = new Vuex.Store({
   state: {
-    themeColor,
+    themeColor: getSetting(APP_SETTING.CurrentTheme),
     fromScene: config.startScene,
     activeScene: config.startScene,
     isSliding: false,
-    isMuted,
+    isMuted: getSetting(APP_SETTING.Muted),
     sysInfo: sysInfo
   },
   getters: {
     wxMenuPos() {
+      const systemInfo = wx.getSystemInfoSync()
       const res = wx.getMenuButtonBoundingClientRect()
       res.marginSide = systemInfo.screenWidth - res.right
       return res
@@ -39,7 +29,11 @@ const store = new Vuex.Store({
     setThemeColor(state, payload) {
       state.themeColor = payload
       wx.vibrateShort()
-      wx.setStorage({ key: 'ThemeColor', data: payload })
+      setSetting(APP_SETTING.CurrentTheme, payload)
+    },
+    randomChangeTheme() {
+      const index = Math.floor(Math.random() * themeColors.length)
+      store.commit('setThemeColor', themeColors[index])
     },
     slideToScene(state, scene) {
       wx.vibrateShort()
@@ -53,7 +47,7 @@ const store = new Vuex.Store({
     toggleMuted(state) {
       state.isMuted = !state.isMuted
       wx.vibrateShort()
-      wx.setStorage({ key: 'isMuted', data: state.isMuted })
+      setSetting(APP_SETTING.Muted, state.isMuted)
     }
   }
 })

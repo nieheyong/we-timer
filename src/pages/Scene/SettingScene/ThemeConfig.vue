@@ -41,11 +41,19 @@
     <div class="top-box">
       <label class="config-line">
         <div class="text">启动时随机更换主题</div>
-        <switch color="#EA5B46" @change="configChange('random',$event)"/>
+        <switch
+          :checked="changeThemeOnAppShow"
+          color="#EA5B46"
+          @change="configChange('randomShow',$event)"
+        />
       </label>
       <label class="config-line">
         <div class="text">摇一摇换主题</div>
-        <switch color="#EA5B46" @change="configChange('shake',$event)"/>
+        <switch
+          :checked="changeThemeOnshake"
+          color="#EA5B46"
+          @change="configChange('shake',$event)"
+        />
       </label>
     </div>
     <div class="color-piece-container">
@@ -62,11 +70,18 @@
 
 <script>
 import { themeColors } from '@/common/config'
+import {
+  getSetting,
+  setSetting,
+  APP_SETTING
+} from '../../../common/app-setting'
 
 export default {
   data() {
     return {
-      themeColors
+      themeColors,
+      changeThemeOnAppShow: getSetting(APP_SETTING.ChangeThemeOnAppShow),
+      changeThemeOnshake: getSetting(APP_SETTING.ChangeThemeOnshake)
     }
   },
   methods: {
@@ -74,7 +89,15 @@ export default {
       this.$store.commit('setThemeColor', color)
     },
     configChange(name, e) {
-      console.log(name, e)
+      const value = e.detail.value
+      if (name === 'randomShow') {
+        this.changeThemeOnAppShow = value
+        setSetting(APP_SETTING.ChangeThemeOnAppShow, value)
+      }
+      if (name === 'shake') {
+        this.changeThemeOnshake = value
+        setSetting(APP_SETTING.ChangeThemeOnshake, value)
+      }
     }
   }
 }

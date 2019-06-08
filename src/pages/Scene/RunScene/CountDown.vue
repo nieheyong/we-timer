@@ -147,6 +147,7 @@
 <script>
 import { SCENE } from '@/common/enums'
 import { delay, playAudio } from '@/common/utils'
+import { getSetting, APP_SETTING } from '../../../common/app-setting'
 
 const STATUS = {
   prepare: 'prepare',
@@ -175,7 +176,9 @@ export default {
 
   computed: {
     params() {
-      const [count, workTimeSec, restTimeSec] = wx.getStorageSync('TimeInfo')
+      const [count, workTimeSec, restTimeSec] = getSetting(
+        APP_SETTING.CountParams
+      )
       return {
         count,
         workTimeSec,
