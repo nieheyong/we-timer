@@ -30,7 +30,7 @@ import SceneContainer from '@/components/SceneContainer'
 import StartScene from './Scene/StartScene'
 import SettingScene from './Scene/SettingScene/SettingScene'
 import RunScene from './Scene/RunScene/RunScene'
-import { SCENE } from '@/common/enums'
+import { SCENE } from './scene'
 import { isSceneInScreen } from '@/common/utils'
 
 export default {

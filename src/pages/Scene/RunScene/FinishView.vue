@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import { SCENE } from '@/common/enums'
+import { SCENE } from '../../scene'
 export default {
   data() {
     return {

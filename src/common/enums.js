@@ -1,18 +1,3 @@
-export const SCENE = {
-  Setting: {
-    name: 'Setting',
-    position: [0, 0] //[x,y]
-  },
-  Start: {
-    name: 'Start',
-    position: [1, 0]
-  },
-  Run: {
-    name: 'Run',
-    position: [2, 0]
-  }
-}
-
 export const THEME_COLORS = [
   'linear-gradient(to top, rgb(0, 0, 0), rgb(67, 67, 67))',
   'linear-gradient(to top, rgb(0, 153, 247), rgb(241, 23, 18))',

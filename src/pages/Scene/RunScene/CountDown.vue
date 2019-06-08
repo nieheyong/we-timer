@@ -145,7 +145,7 @@
 </template>
 
 <script>
-import { SCENE } from '@/common/enums'
+import { SCENE } from '../../scene'
 import { delay, playAudio } from '@/common/utils'
 import { getSetting, APP_SETTING } from '../../../common/app-setting'
 

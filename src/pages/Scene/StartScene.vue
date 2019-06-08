@@ -163,7 +163,7 @@
 </template>
 
 <script>
-import { SCENE } from '@/common/enums'
+import { SCENE } from '../scene'
 import { mapState, mapGetters } from 'vuex'
 import { getSetting, setSetting, APP_SETTING } from '../../common/app-setting'
 

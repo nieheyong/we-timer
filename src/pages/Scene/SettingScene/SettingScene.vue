@@ -98,7 +98,7 @@
           <i class="iconfont icon-arrow_right"></i>
         </li>
         <ThemeConfig v-if="showThemes"/>
-        
+
         <div class="divider"/>
         <li
           @click="showChangeLog=!showChangeLog"
@@ -128,7 +128,7 @@
 </template>
 
 <script>
-import { SCENE } from '@/common/enums'
+import { SCENE } from '../../scene'
 import { mapState, mapGetters } from 'vuex'
 import ChangeLog from './ChangeLog.vue'
 import ThemeConfig from './ThemeConfig.vue'
