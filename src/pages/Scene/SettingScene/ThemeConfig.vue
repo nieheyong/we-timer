@@ -59,7 +59,7 @@
     <div class="color-piece-container">
       <div
         @click="setThemeColor(color)"
-        v-for="color in themeColors"
+        v-for="color in allThemeColors"
         :key="color"
         :style="{background:color}"
         class="color-piece"
@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { themeColors } from '@/common/config'
+import { THEME_COLORS } from '@/common/enums'
 import {
   getSetting,
   setSetting,
@@ -79,7 +79,7 @@ import {
 export default {
   data() {
     return {
-      themeColors,
+      allThemeColors: THEME_COLORS,
       changeThemeOnAppShow: getSetting(APP_SETTING.ChangeThemeOnAppShow),
       changeThemeOnshake: getSetting(APP_SETTING.ChangeThemeOnshake)
     }

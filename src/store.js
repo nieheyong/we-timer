@@ -2,17 +2,18 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { SCENE } from './common/enums'
 import { sysInfo } from './common/utils'
-import * as config from './common/config'
 import { getSetting, setSetting, APP_SETTING } from './common/app-setting'
-import { themeColors } from './common/config'
+import { THEME_COLORS } from './common/utils'
 
 Vue.use(Vuex)
+
+const FirstScene = SCENE.Start
 
 const store = new Vuex.Store({
   state: {
     themeColor: getSetting(APP_SETTING.CurrentTheme),
-    fromScene: config.startScene,
-    activeScene: config.startScene,
+    fromScene: FirstScene,
+    activeScene: FirstScene,
     isSliding: false,
     isMuted: getSetting(APP_SETTING.Muted),
     sysInfo: sysInfo
@@ -32,8 +33,8 @@ const store = new Vuex.Store({
       setSetting(APP_SETTING.CurrentTheme, payload)
     },
     randomChangeTheme() {
-      const index = Math.floor(Math.random() * themeColors.length)
-      store.commit('setThemeColor', themeColors[index])
+      const index = Math.floor(Math.random() * THEME_COLORS.length)
+      store.commit('setThemeColor', THEME_COLORS[index])
     },
     slideToScene(state, scene) {
       wx.vibrateShort()
