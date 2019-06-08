@@ -67,7 +67,7 @@ export const sysInfo = (() => {
 export const getStorageSync = key => {
   let res = ''
   try {
-    wx.getStorageSync(key)
+    res = wx.getStorageSync(key)
   } catch (e) {}
   return res
 }
@@ -76,4 +76,27 @@ export const setStorageSync = (key, data) => {
   try {
     wx.setStorageSync(key, data)
   } catch (e) {}
+}
+
+const PackageJson = require('../../package.json')
+const currentVersion = PackageJson.version
+
+const info = (() => {
+  let info = {}
+  const key = 'APP.Version'
+  const version = getStorageSync(key)
+
+  if (version === '') {
+    info.isNewInstall = true
+  } else if (version !== currentVersion) {
+    info.isNewUpdate = true
+  }
+  setStorageSync(key, currentVersion)
+  return info
+})()
+
+export const AppIntallInfo = {
+  Version: currentVersion,
+  isNewInstall: info.isNewInstall,
+  isNewUpdate: info.isNewUpdate
 }

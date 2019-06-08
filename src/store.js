@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { SCENE } from './pages/scene'
-import { sysInfo } from './common/utils'
+import { sysInfo, AppIntallInfo } from './common/utils'
 import { getSetting, setSetting, APP_SETTING } from './common/app-setting'
 import { THEME_COLORS } from './common/enums'
 
 Vue.use(Vuex)
 
-const FirstScene = SCENE.Start
+const FirstScene = AppIntallInfo.isNewUpdate ? SCENE.Welcome : SCENE.Start
 
 const store = new Vuex.Store({
   state: {

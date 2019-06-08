@@ -9,7 +9,14 @@
 
 <template>
   <div class="page main-page" :style="{background:themeColor}">
-    <SceneContainer :grid="[3,1]" :active="activeScene.position" @transitionend="transitionend">
+    <SceneContainer
+      :grid="SCENE_GRID"
+      :active="activeScene.position"
+      @transitionend="transitionend"
+    >
+      <SceneWrap :sceneInfo="SCENE.Welcome">
+        <Welcome v-if="showWelcomeView"/>
+      </SceneWrap>
       <SceneWrap :sceneInfo="SCENE.Setting">
         <SettingScene v-if="showSettingView"/>
       </SceneWrap>
@@ -28,9 +35,10 @@ import { mapState } from 'vuex'
 import SceneWrap from '@/components/SceneWrap'
 import SceneContainer from '@/components/SceneContainer'
 import StartScene from './Scene/StartScene'
+import Welcome from './Scene/Welcome'
 import SettingScene from './Scene/SettingScene/SettingScene'
 import RunScene from './Scene/RunScene/RunScene'
-import { SCENE } from './scene'
+import { SCENE, SCENE_GRID } from './scene'
 import { isSceneInScreen } from '@/common/utils'
 
 export default {
@@ -39,11 +47,13 @@ export default {
     SceneWrap,
     StartScene,
     SettingScene,
-    RunScene
+    RunScene,
+    Welcome
   },
   data() {
     return {
-      SCENE
+      SCENE,
+      SCENE_GRID
     }
   },
   computed: {
@@ -59,6 +69,14 @@ export default {
     showSettingView() {
       return isSceneInScreen(
         SCENE.Setting,
+        this.fromScene,
+        this.activeScene,
+        this.isSliding
+      )
+    },
+    showWelcomeView() {
+      return isSceneInScreen(
+        SCENE.Welcome,
         this.fromScene,
         this.activeScene,
         this.isSliding
