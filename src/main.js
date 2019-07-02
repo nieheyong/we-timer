@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 
-import store from './store'
+import store from './common/store'
 import './styles/app.scss'
 import './styles/iconfont.css'
 import './common/extend-vue'

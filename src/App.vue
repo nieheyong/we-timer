@@ -1,6 +1,6 @@
 <script>
 import { checkForUpdate } from './common/utils'
-import store from './store'
+import store from './common/store'
 import { getSetting, APP_SETTING } from './common/app-setting'
 
 export default {

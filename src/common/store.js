@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { SCENE } from './pages/scene'
-import { sysInfo, AppIntallInfo } from './common/utils'
-import { getSetting, setSetting, APP_SETTING } from './common/app-setting'
-import { THEME_COLORS } from './common/constant'
+import { SCENE } from '../pages/scene'
+import { sysInfo, AppIntallInfo } from './utils'
+import { getSetting, setSetting, APP_SETTING } from './app-setting'
+import { THEME_COLORS } from './constant'
 
 Vue.use(Vuex)
 
