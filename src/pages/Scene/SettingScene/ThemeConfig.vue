@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { THEME_COLORS } from '@/common/enums'
+import { THEME_COLORS } from '@/common/constant'
 import {
   getSetting,
   setSetting,

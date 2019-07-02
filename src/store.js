@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import { SCENE } from './pages/scene'
 import { sysInfo, AppIntallInfo } from './common/utils'
 import { getSetting, setSetting, APP_SETTING } from './common/app-setting'
-import { THEME_COLORS } from './common/enums'
+import { THEME_COLORS } from './common/constant'
 
 Vue.use(Vuex)
 
