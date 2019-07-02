@@ -41,6 +41,12 @@ export const isSceneInScreen = (scene, fromScene, activeScene, isSliding) => {
   return isActive || isLeaveing
 }
 
+export const initAudioPlay = () => {
+  const audio = wx.createInnerAudioContext()
+  audio.src = '/static/audio/mute.mp3'
+  audio.play()
+}
+
 export const playAudio = fileName => {
   const audio = wx.createInnerAudioContext()
   audio.src = '/static/audio/' + fileName

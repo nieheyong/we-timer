@@ -7,6 +7,7 @@ import './styles/iconfont.css'
 import './common/extend-vue'
 
 import { getSetting, APP_SETTING } from './common/app-setting'
+import { initAudioPlay } from './common/utils'
 
 Vue.config.productionTip = false
 
@@ -33,3 +34,5 @@ wx.onAccelerometerChange(function(e) {
   }
 })
 wx.startAccelerometer()
+
+initAudioPlay()
