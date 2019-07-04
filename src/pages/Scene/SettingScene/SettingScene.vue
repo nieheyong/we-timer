@@ -44,15 +44,17 @@
           flex: 1;
         }
         .iconfont {
+          color: #eee;
+        }
+        .icon-arrow_right {
           transition: transform 0.3s;
           transform: rotate(90deg);
-          color: #eee;
         }
         &.hover {
           background: rgba($color: #fff, $alpha: 0.05);
         }
         &.unfold {
-          .iconfont {
+          .icon-arrow_right {
             transform: rotate(-90deg);
           }
         }
@@ -84,7 +86,7 @@
   <div class="setting-view">
     <div class="top-box" :style="{'padding-top':`${wxMenuPos.bottom+10}px`}">
       <div class="logo-container">
-        <img src="/static/logo.png" alt>
+        <img src="/static/logo.png" alt />
         <div class="app-name">间隔计时</div>
       </div>
       <ul class="setting-box">
@@ -97,9 +99,8 @@
           <div class="text">主题设置</div>
           <i class="iconfont icon-arrow_right"></i>
         </li>
-        <ThemeConfig v-if="showThemes"/>
-
-        <div class="divider"/>
+        <ThemeConfig v-if="showThemes" />
+        <div class="divider" />
         <li
           @click="showChangeLog=!showChangeLog"
           :class="{unfold:showChangeLog}"
@@ -109,7 +110,12 @@
           <div class="text">更新记录</div>
           <i class="iconfont icon-arrow_right"></i>
         </li>
-        <ChangeLog v-if="showChangeLog"/>
+        <ChangeLog v-if="showChangeLog" />
+        <div class="divider" />
+        <li @click="appreciate()" hover-class="hover" class="setting-line">
+          <div class="text">给我赞赏</div>
+          <i class="iconfont icon-like_filled" style="color:#f00"></i>
+        </li>
       </ul>
     </div>
 
@@ -153,6 +159,12 @@ export default {
   methods: {
     backToHome() {
       this.$store.commit('slideToScene', SCENE.Start)
+    },
+    appreciate() {
+      let imageBase64 = require('!!url-loader?{"limit":999000}!./qrcode.jpg')
+      wx.previewImage({
+        urls: [imageBase64]
+      })
     }
   }
 }
