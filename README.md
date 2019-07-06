@@ -1,6 +1,9 @@
 # we-timer
 
-A interval timer wechat mini app made by [uni-app](https://github.com/dcloudio/uni-app)
+## English | [简体中文](https://github.com/nieheyong/we-timer/blob/master/README_CN.md)
+
+A interval timer wechat miniprogram base on
+[uni-app](https://github.com/dcloudio/uni-app)
 
 ## Screenshot
 
@@ -20,8 +23,12 @@ yarn install
 yarn run serve
 ```
 
+Then use [wechat miniprogram devtool](https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html) open dist/dev/mp-weixin preview
+
 ### Compiles and minifies for production
 
 ```shell
 yarn run build
 ```
+
+output file at `dist/build/mp-weixin`
