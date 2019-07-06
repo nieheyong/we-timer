@@ -23,7 +23,7 @@ yarn install
 yarn run serve
 ```
 
-Then use [wechat miniprogram devtool](https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html) open dist/dev/mp-weixin preview
+Then use [wechat miniprogram devtool](https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html) open `dist/dev/mp-weixin` preview
 
 ### Compiles and minifies for production
 
