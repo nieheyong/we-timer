@@ -1,3 +1,5 @@
+import 'core-js/es/string/pad-start'
+
 import Vue from 'vue'
 import App from './App'
 

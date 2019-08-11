@@ -22,7 +22,7 @@ const store = new Vuex.Store({
     wxMenuPos() {
       const systemInfo = wx.getSystemInfoSync()
       const res = wx.getMenuButtonBoundingClientRect()
-      res.marginSide = systemInfo.screenWidth - res.right
+      res.marginSide = systemInfo.windowWidth - res.right
       return res
     }
   },
