@@ -67,7 +67,7 @@
     margin: 40px 0;
     text-align: center;
     font-size: 30px;
-    font-weight: lighter;
+    font-weight: 100;
     &.animate-init {
       transform: translateY(100px);
     }

@@ -53,7 +53,7 @@
       .title {
         font-size: 16px;
         color: #eee;
-        font-weight: lighter;
+        font-weight: 100;
       }
       .number {
         font-size: 10vh;
@@ -83,6 +83,7 @@
       margin-bottom: 20px;
       color: #ddd;
       font-size: 16px;
+      font-weight: 100;
       .tip {
         transform: translateY(20px) scale(0.5);
         opacity: 0;
