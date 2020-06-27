@@ -118,7 +118,7 @@
     </div>
 
     <div class="bottom-box" :class="{'pd-bt-40':isIphoneX}">
-      <div class="tip" v-if="status!==STATUS.prepare">{{totalRemainSec | secToTimeStr}}</div>
+      <div class="tip" v-if="status!==STATUS.prepare">剩余 {{totalRemainSec | secToTimeStr}}</div>
       <div>
         <div
           @click.stop="cancle"

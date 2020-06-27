@@ -111,7 +111,7 @@
     <div class="piece-box">
       <picker @change="countChange" :value="countIndex" :range="countRange">
         <div class="piece" hover-class="hover" :hover-start-time="0">
-          <div class="title">次数</div>
+          <div class="title">回合</div>
           <div class="number">{{count | padStart(2,'0')}}</div>
         </div>
       </picker>

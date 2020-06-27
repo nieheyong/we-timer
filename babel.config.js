@@ -1,6 +1,19 @@
 const plugins = []
 
-if (process.env.UNI_PLATFORM === 'app-plus' && process.env.UNI_USING_V8) {
+if (process.env.UNI_OPT_TREESHAKINGNG) {
+  plugins.push(require('@dcloudio/vue-cli-plugin-uni-optimize/packages/babel-plugin-uni-api/index.js'))
+}
+
+if (
+  (
+    process.env.UNI_PLATFORM === 'app-plus' &&
+    process.env.UNI_USING_V8
+  ) ||
+  (
+    process.env.UNI_PLATFORM === 'h5' &&
+    process.env.UNI_H5_BROWSER === 'builtin'
+  )
+) {
   const path = require('path')
 
   const isWin = /^win/.test(process.platform)
@@ -42,7 +55,7 @@ module.exports = {
       '@vue/app',
       {
         modules: 'commonjs',
-        useBuiltIns: 'entry'
+        useBuiltIns: process.env.UNI_PLATFORM === 'h5' ? 'usage' : 'entry'
       }
     ]
   ],
