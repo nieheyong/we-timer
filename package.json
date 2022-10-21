@@ -48,8 +48,8 @@
     "jest": "^25.4.0",
     "mini-types": "*",
     "miniprogram-api-typings": "*",
-    "node-sass": "^4.12.0",
     "postcss-comment": "^2.0.0",
+    "sass": "^1.55.0",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   },

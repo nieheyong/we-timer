@@ -22,6 +22,13 @@
 <template>
   <ul class="change-log-view">
     <li class="version-change-log">
+      <div class="date">2022-10-22</div>
+      <ul>
+        <li class="log">1.修复了部分安卓手机计时卡顿问题🔧</li>
+        <li class="log">2.修复了Windows系统没有声音的问题🔧</li>
+      </ul>
+    </li>
+    <li class="version-change-log">
       <div class="date">2019-06-08</div>
       <ul>
         <li class="log">1.计时页面新增静音功能🔇</li>

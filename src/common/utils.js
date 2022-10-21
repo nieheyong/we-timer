@@ -1,13 +1,39 @@
-export const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+export const sysInfo = (() => {
+  const systemInfo = wx.getSystemInfoSync()
+
+  let model = systemInfo.model || ''
+  model = model.toLowerCase()
+  const isIphoneX = model.includes('iphone') && model.includes('x')
+
+  let system = (systemInfo.system || '').toLowerCase()
+  const isIos = system.includes('ios')
+  const isAndroid = system.includes('android')
+  const isWindows = system.includes('windows')
+  return {
+    isIphoneX,
+    isIos,
+    isAndroid,
+    isWindows,
+  }
+})()
+
+export const delay = (ms) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms)
+    if (sysInfo.isAndroid) {
+      // dont know why,but helps solved setTimeout invoke too later
+      setTimeout(() => {}, ms)
+    }
+  })
 
 export const checkForUpdate = () => {
   const updateManager = wx.getUpdateManager()
 
-  updateManager.onCheckForUpdate(function(res) {
+  updateManager.onCheckForUpdate(function (res) {
     console.log('app has update: ', res.hasUpdate)
   })
 
-  updateManager.onUpdateReady(function() {
+  updateManager.onUpdateReady(function () {
     wx.showModal({
       title: '更新提示',
       content: '新版本已经准备好，是否重启应用？',
@@ -15,11 +41,11 @@ export const checkForUpdate = () => {
         if (res.confirm) {
           updateManager.applyUpdate()
         }
-      }
+      },
     })
   })
 
-  updateManager.onUpdateFailed(function() {
+  updateManager.onUpdateFailed(function () {
     console.log('app update failed: ', res.hasUpdate)
   })
 }
@@ -30,7 +56,7 @@ export const toTimeStr = (min, sec) => {
   return min + ':' + sec
 }
 
-export const secToTimeStr = sec => {
+export const secToTimeStr = (sec) => {
   let min = Math.floor(sec / 60)
   return toTimeStr(min, sec % 60)
 }
@@ -41,36 +67,53 @@ export const isSceneInScreen = (scene, fromScene, activeScene, isSliding) => {
   return isActive || isLeaveing
 }
 
-export const initAudioPlay = () => {
-  const audio = wx.createInnerAudioContext()
-  audio.src = '/static/audio/mute.mp3'
-  audio.play()
-}
+const audioFilePrefix = sysInfo.isWindows
+  ? 'https://cdn.jsdelivr.net/gh/nieheyong/we-timer@master/src/static/audio/'
+  : '/static/audio/'
 
-export const playAudio = fileName => {
-  const audio = wx.createInnerAudioContext()
-  audio.src = '/static/audio/' + fileName
-  audio.play()
-  audio.onEnded(audio.destroy)
-}
+class AudioPool {
+  pool = new Map()
+  constructor() {
+    const fileNames = [
+      'ding.mp3',
+      'dong.mp3',
+      'mute.mp3',
+      'rest.mp3',
+      'success.mp3',
+    ]
 
-export const sysInfo = (() => {
-  const systemInfo = wx.getSystemInfoSync()
-
-  let model = systemInfo.model || ''
-  model = model.toLowerCase()
-  const isIphoneX = model.includes('iphone') && model.includes('x')
-
-  let system = systemInfo.system || ''
-  const isIos = system.toLowerCase().includes('ios')
-
-  return {
-    isIphoneX,
-    isIos
+    for (const fileName of fileNames) {
+      this.pool.set(fileName, [this.createAudio(fileName)])
+    }
   }
-})()
 
-export const getStorageSync = key => {
+  createAudio(fileName) {
+    const audio = wx.createInnerAudioContext()
+    audio.src = audioFilePrefix + fileName
+    return audio
+  }
+
+  getAudio(fileName) {
+    const filePool = this.pool.get(fileName)
+    console.log(fileName, filePool.length)
+    let audio = filePool.length ? filePool.pop() : this.createAudio(fileName)
+    audio.offEnded()
+    audio.onEnded(() => filePool.push(audio))
+    return audio
+  }
+}
+
+const audioPool = new AudioPool()
+
+export const initAudioPlay = () => {
+  audioPool.getAudio('mute.mp3').play()
+}
+
+export const playAudio = (fileName) => {
+  audioPool.getAudio(fileName).play()
+}
+
+export const getStorageSync = (key) => {
   let res = ''
   try {
     res = wx.getStorageSync(key)
@@ -104,5 +147,5 @@ const info = (() => {
 export const AppIntallInfo = {
   Version: currentVersion,
   isNewInstall: info.isNewInstall,
-  isNewUpdate: info.isNewUpdate
+  isNewUpdate: info.isNewUpdate,
 }

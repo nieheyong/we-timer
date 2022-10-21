@@ -111,11 +111,6 @@
           <i class="iconfont icon-arrow_right"></i>
         </li>
         <ChangeLog v-if="showChangeLog" />
-        <div class="divider" />
-        <li @click="appreciate()" hover-class="hover" class="setting-line">
-          <div class="text">给我赞赏</div>
-          <i class="iconfont icon-like_filled" style="color:#f00"></i>
-        </li>
       </ul>
     </div>
 
